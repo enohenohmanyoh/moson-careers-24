@@ -1,0 +1,103 @@
+<div class="property-details-container" *ngIf="property; else notFound" #printSection>
+  <div class="property-header">
+    <div class="breadcrumb">You are here: Vartrust / Residential For Sale / Roodepoor / Groblepark / 2 Bedroom Apartment / 38 Silver Lakes, 1 Buliekant</div>
+    <h1>{{ property.title }}</h1>
+    <p class="location">{{ property.location }}</p>
+    <p class="price">R{{ property.price | number }}</p>
+    <div class="listing-info">SHOWING LISTING 2 OF 106</div>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="gallery-container" *ngIf="galleryItems.length > 0">
+      <div class="gallery-header">
+        <div class="gallery-tabs">
+          <span class="active">GALLERY</span>
+          <span>VIDEO</span>
+          <span>VIRTUAL TOUR</span>
+        </div>
+        <div class="gallery-featured">FEATURED</div>
+      </div>
+      <gallery [items]="galleryItems" thumbPosition="left"></gallery>
+    </div>
+
+    <div class="contact-form-container">
+      <div class="form-header">
+        <div class="form-buttons">
+          <button class="action-button" (click)="printPage()">
+            <i class="fas fa-print"></i> Print
+          </button>
+          <button class="action-button" (click)="sharePage()">
+            <i class="fas fa-share-alt"></i> Share
+          </button>
+          <button class="action-button" (click)="downloadPDF()">
+            <i class="fas fa-file-pdf"></i> PDF
+          </button>
+        </div>
+        <div class="agent-contact">Contact {{ property.agent?.name || 'Agent' }}</div>
+        <div class="web-ref">Web Ref FL5054</div>
+      </div>
+
+      <form class="contact-form">
+        <div class="form-group">
+          <label for="name">Name *</label>
+          <input type="text" id="name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="phone">Contact Number *</label>
+          <input type="tel" id="phone" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" required>
+        </div>
+        
+        <div class="form-group">
+          <textarea readonly>Please send me more information on FL5054 in Groblepark, Roodepoor. Thank You.</textarea>
+        </div>
+        
+        <div class="form-checkbox">
+          <input type="checkbox" id="newsletter">
+          <label for="newsletter">Subscribe to the Email Newsletter</label>
+        </div>
+        
+        <div class="form-checkbox">
+          <input type="checkbox" id="alerts">
+          <label for="alerts">Subscribe to Property Email Alerts</label>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" class="favorite-button">Add to My Favourites</button>
+          <button type="submit" class="submit-button">Send</button>
+        </div>
+        
+        <div class="form-footer">
+          <p>We will communicate real estate related marketing information and related services. We respect your privacy. See our Privacy Policy</p>
+          <div class="captcha">I'm not a robot</div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="property-info">
+    <div class="main-info">
+      <h2>Property Details</h2>
+      <p>{{ property.description }}</p>
+
+      <div class="features" *ngIf="property.features && property.features.length > 0">
+        <h3>Features</h3>
+        <ul>
+          <li *ngFor="let feature of property.features">{{ feature }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #notFound>
+  <div class="not-found">
+    <h2>Property not found</h2>
+    <p>The property you're looking for doesn't exist or has been removed.</p>
+  </div>
+</ng-template>

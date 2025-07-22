@@ -1,0 +1,17 @@
+
+<div class="property-card" [routerLink]="['/property', property.id]">
+  <div class="image-container">
+    <img [src]="property.images[0]" [alt]="property.title">
+  </div>
+  <div class="property-info">
+    <h3>{{ property.title }}</h3>
+    <p class="location">{{ property.location }}</p>
+    <p class="price">R{{ property.price | number }}</p>
+    <div class="features">
+      <span>{{ property.bedrooms }} Bed</span>
+      <span>{{ property.bathrooms }} Bath</span>
+      <span>{{ property.area }}</span>
+    </div>
+    <a [routerLink]="['/property', property.id]" class="view-details">View Details</a>
+  </div>
+</div>

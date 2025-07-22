@@ -1,0 +1,38 @@
+<div class="search-bar-container">
+  <form (ngSubmit)="onSubmit()" class="search-form">
+    <div class="search-field">
+      <input type="text" [(ngModel)]="searchTerm" name="searchTerm" placeholder="Search by keyword, suburb or address">
+    </div>
+
+    <div class="filter-fields">
+      <div class="filter-field">
+        <label>Property Type</label>
+        <select [(ngModel)]="selectedType" name="propertyType">
+          <option *ngFor="let type of propertyTypes" [value]="type.value">{{ type.label }}</option>
+        </select>
+      </div>
+
+      <div class="filter-field">
+        <label>Location</label>
+        <select [(ngModel)]="selectedLocation" name="location">
+          <option value="">All Locations</option>
+          <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+        </select>
+      </div>
+
+      <div class="filter-field price-range">
+        <label>Price Range</label>
+        <div class="price-inputs">
+          <input type="number" [(ngModel)]="minPrice" name="minPrice" placeholder="Min">
+          <span>to</span>
+          <input type="number" [(ngModel)]="maxPrice" name="maxPrice" placeholder="Max">
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="search-btn">Search</button>
+        <button type="button" class="clear-btn" (click)="clearFilters()">Clear</button>
+      </div>
+    </div>
+  </form>
+</div>

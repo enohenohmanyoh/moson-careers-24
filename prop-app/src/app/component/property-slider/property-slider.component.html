@@ -1,0 +1,21 @@
+
+<div class="slider-container">
+  <h2>Featured Properties</h2>
+  
+  <div class="slider-wrapper">
+    <div class="slider-track" [style.transform]="'translateX(' + currentPosition + 'px)'">
+      <div class="slide" *ngFor="let property of properties">
+        <app-property-card [property]="property"></app-property-card>
+      </div>
+    </div>
+  </div>
+  
+  <div class="slider-controls">
+    <button (click)="prevSlide()" [disabled]="currentSlide === 0">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button (click)="nextSlide()" [disabled]="currentSlide >= maxSlide">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</div>

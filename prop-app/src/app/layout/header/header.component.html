@@ -1,0 +1,68 @@
+
+
+      <!-- 
+  <div class="top-bar">
+    <div class="container">
+      <div class="contact-info">
+        <span><i class="icon-phone"></i> 012 345 6789</span>
+        <span><i class="icon-email"></i> zapiro.co.za</span>
+      </div>
+      <div class="social-links">
+        <a href="#"><i class="icon-facebook"></i>Facebook</a>
+        <a href="#"><i class="icon-twitter"></i>Twitter</a>
+        <a href="#"><i class="icon-linkedin"></i>Linkedin</a>
+        <a href="#"><i class="icon-instagram"></i>Instagram</a>
+      </div>
+    </div>
+  </div>
+
+-->
+
+<header class="main-header">
+  <div class="main-nav">
+    <div class="container">
+      <div class="logo">
+        <a routerLink="/">
+          <img src="assets/images/logo.jpg" alt="Your Logo">
+        </a>
+      </div>
+
+      <nav class="desktop-nav">
+        <ul>
+          <li *ngFor="let link of navLinks">
+            <ng-container *ngIf="link.subLinks; else singleLink">
+              <div class="dropdown">
+                <a [routerLink]="link.path" routerLinkActive="active">{{ link.label }} <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                  <a *ngFor="let subLink of link.subLinks" [routerLink]="subLink.path">{{ subLink.label }}</a>
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #singleLink>
+              <a [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
+            </ng-template>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="mobile-menu-toggle" (click)="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <nav class="mobile-nav" [class.open]="isMenuOpen">
+      <ul>
+        <li *ngFor="let link of navLinks">
+          <a [routerLink]="link.path" routerLinkActive="active" (click)="toggleMenu()">{{ link.label }}</a>
+          <ul *ngIf="link.subLinks" class="mobile-submenu">
+            <li *ngFor="let subLink of link.subLinks">
+              <a [routerLink]="subLink.path" (click)="toggleMenu()">{{ subLink.label }}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
