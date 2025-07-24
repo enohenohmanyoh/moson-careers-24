@@ -1,3 +1,4 @@
+/* Hero section styles */
 .hero {
   background-size: cover;
   background-position: center;
@@ -11,6 +12,7 @@
   transition: background-image 1s ease-in-out;
 }
 
+/* Content inside the hero */
 .hero-content h1 {
   font-size: 3rem;
   margin-bottom: 20px;
@@ -20,4 +22,58 @@
   font-size: 1.2rem;
   max-width: 600px;
   margin: 0 auto;
+}
+
+/* Centered link under hero */
+.center-button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+  list-style: none;
+}
+
+/* Link styled as a green button */
+.property-link {
+  padding: 12px 28px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.property-link:hover {
+  background-color: #388E3C;
+  transform: translateY(-2px);
+}
+
+/* Image post section */
+.post {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 60px 0;
+  padding: 0 20px;
+}
+
+.post-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.post-content img {
+  width: 100%;
+  max-width: 850px; /* 🔽 Reduced from 1100px */
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-content img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }

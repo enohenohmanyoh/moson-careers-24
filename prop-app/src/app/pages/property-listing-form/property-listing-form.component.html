@@ -1,0 +1,203 @@
+<!-- property-listing-form.component.html -->
+<div class="container">
+  <header>
+    <h1>VARTRUST</h1>
+    <p class="breadcrumb">You are here: Vartrust / List Your Property</p>
+    <h2>List Your Property</h2>
+    <p class="intro">
+      When you list a property with Vartrust, we work hard to ensure a sale or a rental. 
+      We add enormous value for you, here is how we do it:
+    </p>
+  </header>
+
+  <div *ngIf="!showPreview; else previewSection">
+    <form (ngSubmit)="showPreview = true">
+      <section class="form-section">
+        <h3>SELECT / LANDLORD REGISTRATION</h3>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="userType">I am a...*</label>
+            <select id="userType" [(ngModel)]="formData.userType" name="userType" required>
+              <option value="" disabled selected>Please select</option>
+              <option *ngFor="let option of userTypeOptions" [value]="option">{{option}}</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="branch">Select a branch closest to you*</label>
+            <select id="branch" [(ngModel)]="formData.branch" name="branch" required>
+              <option value="" disabled selected>Head Office</option>
+              <option *ngFor="let branch of branchOptions" [value]="branch">{{branch}}</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h3>Contact Details</h3>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name*</label>
+            <input type="text" id="name" [(ngModel)]="formData.name" name="name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="contactNumber">Contact Number*</label>
+            <input type="tel" id="contactNumber" [(ngModel)]="formData.contactNumber" name="contactNumber" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address*</label>
+            <input type="email" id="email" [(ngModel)]="formData.email" name="email" required>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h3>Property Details</h3>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="listingType">Listing Type*</label>
+            <select id="listingType" [(ngModel)]="formData.listingType" name="listingType" required>
+              <option value="" disabled selected>Please select</option>
+              <option *ngFor="let type of listingTypeOptions" [value]="type">{{type}}</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="askingPrice">Asking Price*</label>
+            <input type="text" id="askingPrice" [(ngModel)]="formData.askingPrice" name="askingPrice" required>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="propertyAddress">Property Address*</label>
+          <input type="text" id="propertyAddress" [(ngModel)]="formData.propertyAddress" name="propertyAddress" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="propertyDescription">Property Description*</label>
+          <textarea id="propertyDescription" [(ngModel)]="formData.propertyDescription" name="propertyDescription" required></textarea>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h3>Property Images (Max {{maxImages}})</h3>
+        <div class="image-upload-container">
+          <label class="upload-btn">
+            Upload Images
+            <input type="file" accept="image/*" multiple (change)="onImageUpload($event)" style="display: none;">
+          </label>
+          <span class="upload-hint">You can upload up to {{maxImages}} images</span>
+        </div>
+        
+        <div class="image-preview-container" *ngIf="imagePreviews.length > 0">
+          <div class="image-preview" *ngFor="let preview of imagePreviews; let i = index">
+            <img [src]="preview" alt="Property image preview">
+            <button type="button" class="remove-btn" (click)="removeImage(i)">×</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="captcha-section">
+          <label class="checkbox-label">
+            <input type="checkbox" [(ngModel)]="formData.subscribeToNewsletter" name="subscribeToNewsletter">
+            Subscribe to the <strong>Email Newsletter</strong>
+          </label>
+          <p class="privacy-note">
+            We will communicate real estate related marketing information and related services. 
+            We respect your privacy. See our <a href="#">Privacy Policy</a>
+          </p>
+        </div>
+      </section>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-reset" (click)="resetForm()">Reset Form</button>
+        <button type="submit" class="btn btn-submit" [disabled]="!isFormValid()">Preview Listing</button>
+      </div>
+    </form>
+  </div>
+
+  <ng-template #previewSection>
+    <div class="preview-container">
+      <h2>Preview Your Listing</h2>
+      <p>Please review your information before submitting</p>
+      
+      <div class="preview-section">
+        <h3>Contact Information</h3>
+        <p><strong>Name:</strong> {{formData.name}}</p>
+        <p><strong>Contact Number:</strong> {{formData.contactNumber}}</p>
+        <p><strong>Email:</strong> {{formData.email}}</p>
+        <p><strong>User Type:</strong> {{formData.userType}}</p>
+        <p><strong>Preferred Branch:</strong> {{formData.branch}}</p>
+      </div>
+      
+      <div class="preview-section">
+        <h3>Property Details</h3>
+        <p><strong>Listing Type:</strong> {{formData.listingType}}</p>
+        <p><strong>Asking Price:</strong> {{formData.askingPrice}}</p>
+        <p><strong>Address:</strong> {{formData.propertyAddress}}</p>
+        <p><strong>Description:</strong> {{formData.propertyDescription}}</p>
+      </div>
+      
+      <div class="preview-section" *ngIf="imagePreviews.length > 0">
+        <h3>Property Images ({{imagePreviews.length}}/{{maxImages}})</h3>
+        <div class="preview-images">
+          <div *ngFor="let preview of imagePreviews" class="preview-image">
+            <img [src]="preview" alt="Property image">
+          </div>
+        </div>
+      </div>
+      
+      <div class="preview-section">
+        <p><strong>Newsletter Subscription:</strong> {{formData.subscribeToNewsletter ? 'Yes' : 'No'}}</p>
+      </div>
+      
+      <div class="preview-actions">
+        <button type="button" class="btn btn-back" (click)="goBackToEdit()">Edit Details</button>
+        <button type="button" class="btn btn-submit" (click)="onSubmit()">Submit Listing</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <section class="info-section">
+    <h3>Reliability and Communication</h3>
+    <p>
+      We take pride in giving regular and good feedback and believe it is almost the most important part of selling or renting a property. 
+      We keep you updated and involved. We will give you honest feedback on viewings within agreed times.
+    </p>
+  </section>
+
+  <section class="info-section">
+    <h3>Marketing</h3>
+    <p>
+      We understand that we only get one opportunity to impress a buyer or a tenant enough for them to book a viewing, 
+      so we use a professional photographer to photograph your property, we produce a professional listing advert which 
+      could be enhanced with an aerial shoot, a night shoot, a virtual tour or private website. Your property is listed 
+      on all the major portals (several minor ones too) to ensure access to all databases and all new buyers or tenants 
+      coming into the market.
+    </p>
+  </section>
+
+  <section class="info-section">
+    <h3>Valuation and pricing</h3>
+    <p>
+      Pricing your property correctly so that it sells quickly and nets you the best possible value is a skill that we 
+      constantly look to improve. We use several tools to ensure valuations are as accurate as possible and provide you 
+      with our written assessments and comparative market analysis to substantiate our recommendations.
+    </p>
+  </section>
+
+  <section class="info-section">
+    <h3>Technology</h3>
+    <p>
+      We use cutting edge technology and constantly look for new ideas and new ways to take your property to market and 
+      to showcase it well. New technologies in photography, cloud based listings, mobile presentations, geo-targeting are 
+      some of the new trends we have embraced.
+    </p>
+  </section>
+</div>

@@ -1,11 +1,35 @@
 <main>
- 
+  <!-- First Hero Section -->
   <section class="hero" [ngStyle]="{'background-image': getHeroBackground()}">
     <div class="hero-content">
-      <h1>Find Your Perfect Home</h1>
-      <p>Discover the best properties in Centurion and surrounding areas</p>
+      <h1>Find Your Perfect Home with us</h1>
+      <p>Discover the best properties surrounding areas</p>
     </div>
   </section>
 
   <app-property-slider></app-property-slider>
+
+  <!-- Second Hero Section -->
+   <div class="center-button-wrapper">
+    <a href="/list" class="property-link">List your Property</a>
+  </div>
+
+  <section class="hero" [ngStyle]="{'background-image': getHeroBackground1()}">
+    <div class="hero-content">
+      <h1>Why Sell or Rent with Moson?</h1>
+      <p>Discover the best properties surrounding your areas</p>
+    </div>
+  </section>
+
+  <!-- Centered Button -->
+  <div class="center-button-wrapper">
+    <a href="/list" class="property-link">List your Property</a>
+  </div>
 </main>
+
+<!-- Post Section -->
+<section class="post">
+  <div class="post-content">
+    <img src="/assets/images/post.jpg" alt="alt">
+  </div>
+</section>
