@@ -1,35 +1,66 @@
+
+
 <main>
-  <!-- First Hero Section -->
-  <section class="hero" [ngStyle]="{'background-image': getHeroBackground()}">
-    <div class="hero-content">
-      <h1>Find Your Perfect Home with us</h1>
-      <p>Discover the best properties surrounding areas</p>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Find Your Dream Job Today</h1>
+        <p>Thousands of jobs available. Find yours now.</p>
+        
+        <div class="search-box">
+          <input type="text" placeholder="Job title, keywords">
+          <input type="text" placeholder="Location">
+          <button class="btn btn-primary">Search Jobs</button>
+        </div>
+      </div>
     </div>
   </section>
 
-  <app-property-slider></app-property-slider>
-
-  <!-- Second Hero Section -->
-   <div class="center-button-wrapper">
-    <a href="/list" class="property-link">List your Property</a>
-  </div>
-
-  <section class="hero" [ngStyle]="{'background-image': getHeroBackground1()}">
-    <div class="hero-content">
-      <h1>Why Sell or Rent with Moson?</h1>
-      <p>Discover the best properties surrounding your areas</p>
+  <!-- Popular Categories -->
+  <section class="categories">
+    <div class="container">
+      <h2>Popular Categories</h2>
+      <div class="category-grid">
+        <div class="category-card" *ngFor="let category of popularCategories">
+          <h3>{{ category.name }}</h3>
+          <p>{{ category.jobs }} Jobs</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Centered Button -->
-  <div class="center-button-wrapper">
-    <a href="/list" class="property-link">List your Property</a>
-  </div>
+  <!-- Featured Jobs -->
+  <section class="featured-jobs">
+    <div class="container">
+      <h2>Featured Jobs</h2>
+      <div class="jobs-grid">
+        <div class="job-card" *ngFor="let job of featuredJobs">
+          <h3>{{ job.title }}</h3>
+          <p class="company">{{ job.company }}</p>
+          <div class="job-details">
+            <span class="location">{{ job.location }}</span>
+            <span class="type">{{ job.type }}</span>
+            <span class="salary">{{ job.salary }}</span>
+          </div>
+          <button class="btn btn-outline">View Details</button>
+        </div>
+      </div>
+      <div class="cta">
+        <a routerLink="/jobs" class="btn btn-primary">Browse All Jobs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Are You Looking For Talent?</h2>
+        <p>Post your job and find the perfect candidate today.</p>
+        <a routerLink="/employer" class="btn btn-primary">Post a Job</a>
+      </div>
+    </div>
+  </section>
 </main>
 
-<!-- Post Section -->
-<section class="post">
-  <div class="post-content">
-    <img src="/assets/images/post.jpg" alt="alt">
-  </div>
-</section>

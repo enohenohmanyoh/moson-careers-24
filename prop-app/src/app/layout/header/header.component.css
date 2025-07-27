@@ -1,286 +1,122 @@
-.main-header {
-  position: sticky;
+.header {
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
   top: 0;
   z-index: 1000;
-  background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo a {
+  font-size: 1.5rem;
+  font-weight: bold;
   color: #2c3e50;
+  text-decoration: none;
+}
 
-  .header-inner {
-    padding: 15px 0;
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
+.nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
 
-  .logo {
-    flex-shrink: 0;
+.nav a {
+  text-decoration: none;
+  color: #34495e;
+  font-weight: 500;
+  transition: color 0.3s;
+}
 
-    img {
-      height: 40px;
-      width: auto;
-      display: block;
-    }
-  }
+.nav a:hover, .nav a.active {
+  color: #3498db;
+}
 
-  .navbar {
-    margin-left: auto;
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+}
 
-    .nav-links {
-      display: flex;
-      gap: 6px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      align-items: center;
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+}
 
-      a {
-        color: #2c3e50;
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 0.9rem;
-        padding: 4px 8px;
-        position: relative;
-        transition: all 0.3s;
-        white-space: nowrap;
-        border-radius: 4px;
+.btn-outline {
+  border: 1px solid #3498db;
+  color: #3498db;
+}
 
-        &:hover,
-        &.active {
-          color: #e74c3c;
-        }
+.btn-outline:hover {
+  background-color: #3498db;
+  color: white;
+}
 
-        &.active {
-          border-bottom: none;
+.btn-primary {
+  background-color: #3498db;
+  color: white;
+  border: 1px solid #3498db;
+}
 
-          &:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #e74c3c;
-          }
-        }
-      }
-    }
-  }
+.btn-primary:hover {
+  background-color: #2980b9;
+  border-color: #2980b9;
+}
 
-  .dropdown {
-    position: relative;
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
 
-    .drop-btn::after {
-      content: " ▾";
-      font-size: 0.7em;
-      margin-left: 5px;
-    }
+.menu-toggle span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #2c3e50;
+  margin: 4px 0;
+  transition: all 0.3s;
+}
 
-    &:hover {
-      .dropdown-menu {
-        display: block;
-        animation: fadeIn 0.3s ease-out;
-      }
-    }
-
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      background-color: #2c3e50;
-      min-width: 220px;
-      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-      z-index: 100;
-      border-radius: 4px;
-      padding: 8px 0;
-      left: 0;
-      top: 100%;
-      list-style: none; /* Added to remove bullets */
-      margin: 0; /* Ensure no margin creates indentation */
-
-      li {
-        list-style: none; /* Explicitly remove bullets from list items */
-        margin: 0; /* Remove default margins */
-        padding: 0; /* Remove default padding */
-
-        a {
-          display: block;
-          padding: 8px 16px;
-          font-size: 0.85rem;
-          color: white !important;
-          font-weight: 400;
-          transition: all 0.2s;
-          margin: 0 5px;
-          border-radius: 3px;
-          text-align: left;
-
-          &:hover {
-            background-color: #1a2a3a;
-          }
-
-          &.active {
-            background-color: #e74c3c;
-          }
-        }
-      }
-    }
-  }
-
-  .header-tools .icon {
-    color: #2c3e50;
-    font-size: 1.2rem;
-    text-decoration: none;
-    padding: 0.5rem;
-    transition: color 0.3s;
-
-    &:hover {
-      color: #e74c3c;
-    }
-  }
-
-  .mobile-menu-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 21px;
-    cursor: pointer;
-    margin-left: 15px;
-
-    span {
-      display: block;
-      height: 3px;
-      width: 100%;
-      background-color: #2c3e50;
-      border-radius: 3px;
-      transition: all 0.3s;
-    }
-  }
-
-  .mobile-nav {
-    display: none;
+@media (max-width: 768px) {
+  .nav {
     position: fixed;
-    top: 104px;
+    top: 70px;
     left: 0;
     width: 100%;
     background-color: white;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-    list-style: none; /* Added to remove bullets */
-    padding-left: 0; /* Remove default padding */
-
-    &.open {
-      max-height: 100vh;
-      overflow-y: auto;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      li {
-        border-bottom: 1px solid #eee;
-        list-style: none; /* Explicitly remove bullets */
-
-        a {
-          display: block;
-          padding: 15px 20px;
-          color: #2c3e50;
-          text-decoration: none;
-          font-size: 0.9rem;
-          transition: all 0.3s;
-
-          &:hover,
-          &.active {
-            background-color: #f9f9f9;
-            color: #e74c3c;
-          }
-        }
-
-        .mobile-submenu {
-          padding-left: 0;
-          list-style: none !important; /* Force no bullets */
-          background-color: #2c3e50;
-          max-height: 0;
-          overflow: hidden;
-          transition: max-height 0.3s ease-out;
-
-          li {
-            border-bottom: 1px solid #3a4b5c;
-            list-style: none; /* Explicitly remove bullets */
-
-            a {
-              color: white !important;
-              padding-left: 30px !important;
-              font-size: 0.85rem;
-
-              &:hover {
-                background-color: #1a2a3a !important;
-              }
-            }
-          }
-        }
-
-        &.active .mobile-submenu {
-          max-height: 500px;
-        }
-      }
-    }
+    transform: translateY(-150%);
+    transition: transform 0.3s;
   }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
+  
+  .nav.active {
     transform: translateY(0);
   }
-}
-
-@media (max-width: 992px) {
-  .main-header {
-    .navbar .nav-links,
-    .header-tools {
-      display: none;
-    }
-
-    .mobile-menu-toggle {
-      display: flex;
-    }
+  
+  .nav ul {
+    flex-direction: column;
+    padding: 1rem;
   }
-}
-
-@media (max-width: 768px) {
-  .main-header {
-    .header-inner {
-      padding: 10px 0;
-    }
-
-    .logo img {
-      height: 35px;
-    }
-
-    .mobile-nav {
-      top: 94px;
-    }
+  
+  .auth-buttons {
+    display: none;
   }
-}
-
-@media (max-width: 576px) {
-  .main-header {
-    .logo img {
-      height: 30px;
-    }
-
-    .mobile-nav {
-      top: 84px;
-    }
+  
+  .menu-toggle {
+    display: block;
   }
 }

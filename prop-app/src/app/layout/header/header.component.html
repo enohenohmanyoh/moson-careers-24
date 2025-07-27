@@ -1,3 +1,69 @@
+<header class="header">
+  <div class="container">
+    <div class="logo">
+      <a routerLink="/">Careers24</a>
+    
+    </div>
+   
+    <nav class="nav" [class.active]="isMenuOpen">
+      <ul>
+        
+        <a routerLink="/" routerLinkActive="active">Home</a>
+        <a routerLink="/list-jobs" routerLinkActive="active">List Jobs</a>
+       <!--  <a routerLink="/jobs-details" routerLinkActive="active">List Jobs</a>-->  
+      
+        <a routerLink="/employer" routerLinkActive="active">Employers</a>
+        <a routerLink="/candidate" routerLinkActive="active">Candidates</a>
+      </ul>
+    </nav>
+    
+    <div class="auth-buttons">
+      <a routerLink="/login" class="btn btn-outline">Login</a>
+      <a routerLink="/register" class="btn btn-primary">Register</a>
+    </div>
+    
+    <button class="menu-toggle" (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
 <header class="main-header">
   <div class="container header-inner">
     <div class="logo">
@@ -83,3 +149,4 @@
     </div>
   </div>
 </header>
+-->

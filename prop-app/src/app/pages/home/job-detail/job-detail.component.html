@@ -1,0 +1,49 @@
+<div class="job-detail-container">
+  <div class="main-content">
+    <div class="job-header">
+      <h1>{{ job.title }}</h1>
+      <div class="job-meta">
+        <span class="company">{{ job.company }}</span>
+        <span class="location">{{ job.location }}</span>
+        <span class="job-type">{{ job.type }}</span>
+        <span class="salary">{{ job.salary }}</span>
+        <span class="posted">{{ job.posted }}</span>
+      </div>
+    </div>
+
+    <div class="job-description" [innerHTML]="job.description"></div>
+
+    <div class="company-section">
+      <h2>About the Company</h2>
+      <div class="company-description" [innerHTML]="job.companyDescription"></div>
+    </div>
+
+    <div class="benefits-section">
+      <h2>Benefits</h2>
+      <ul class="benefits-list">
+        <li *ngFor="let benefit of job.benefits">{{ benefit }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="actions">
+      <button class="apply-button">Apply Now</button>
+      <button class="save-button">Save Job</button>
+    </div>
+
+    <div class="related-jobs">
+      <h3>Related Jobs</h3>
+      <div class="job-card" *ngFor="let relatedJob of relatedJobs" (click)="viewJobDetails(relatedJob.id)">
+        <h4>{{ relatedJob.title }}</h4>
+        <div class="job-meta">
+          <span class="company">{{ relatedJob.company }}</span>
+          <span class="location">{{ relatedJob.location }}</span>
+          <span class="job-type">{{ relatedJob.type }}</span>
+          <span class="salary">{{ relatedJob.salary }}</span>
+          <span class="posted">{{ relatedJob.posted }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

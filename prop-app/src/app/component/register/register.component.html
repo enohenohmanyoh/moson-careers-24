@@ -1,0 +1,72 @@
+
+
+<main class="auth-page">
+  <div class="container">
+    <div class="auth-card">
+      <h1>Create Your Account</h1>
+      
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" formControlName="name" placeholder="Enter your full name">
+          <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="error">
+            Name is required
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email" placeholder="Enter your email">
+          <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error">
+            Please enter a valid email
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" formControlName="password" placeholder="Enter your password">
+          <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error">
+            Password must be at least 6 characters
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm your password">
+          <div *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirmPassword')?.touched" class="error">
+            Passwords do not match
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>I am a:</label>
+          <div class="radio-group">
+            <label>
+              <input type="radio" formControlName="userType" value="candidate"> Job Seeker
+            </label>
+            <label>
+              <input type="radio" formControlName="userType" value="employer"> Employer
+            </label>
+          </div>
+        </div>
+        
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+        
+        <div *ngIf="successMessage" class="success-message">
+          {{ successMessage }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+          <span *ngIf="!isLoading">Register</span>
+          <span *ngIf="isLoading">Registering...</span>
+        </button>
+        
+        <div class="auth-footer">
+          <p>Already have an account? <a routerLink="/login">Login</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>

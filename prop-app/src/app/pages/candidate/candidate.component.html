@@ -1,0 +1,112 @@
+
+
+<main class="candidate-dashboard">
+  <div class="container">
+    <div class="profile-header">
+      <div class="profile-info">
+        <div class="avatar">
+          <img src="assets/images/default-avatar.jpg" alt="Profile Picture">
+        </div>
+        <div class="details">
+          <h1>{{ profile.name }}</h1>
+          <p class="headline">{{ profile.headline }}</p>
+          <p class="email">{{ profile.email }}</p>
+        </div>
+      </div>
+      <button class="btn btn-primary">Edit Profile</button>
+    </div>
+    
+    <div class="dashboard-tabs">
+      <button 
+        [class.active]="activeTab === 'dashboard'" 
+        (click)="switchTab('dashboard')">
+        Dashboard
+      </button>
+      <button 
+        [class.active]="activeTab === 'saved'" 
+        (click)="switchTab('saved')">
+        Saved Jobs
+      </button>
+      <button 
+        [class.active]="activeTab === 'applications'" 
+        (click)="switchTab('applications')">
+        My Applications
+      </button>
+      <button 
+        [class.active]="activeTab === 'profile'" 
+        (click)="switchTab('profile')">
+        My Profile
+      </button>
+    </div>
+    
+    <div class="dashboard-content">
+      <!-- Dashboard Tab -->
+      <div *ngIf="activeTab === 'dashboard'" class="dashboard-overview">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>Saved Jobs</h3>
+            <p class="stat-value">{{ savedJobs.length }}</p>
+          </div>
+          <div class="stat-card">
+            <h3>Applications</h3>
+            <p class="stat-value">{{ appliedJobs.length }}</p>
+          </div>
+        </div>
+        
+        <div class="recommended-jobs">
+          <h2>Recommended For You</h2>
+          <!-- Recommended jobs list would go here -->
+        </div>
+      </div>
+      
+      <!-- Saved Jobs Tab -->
+      <div *ngIf="activeTab === 'saved'">
+        <h2>Saved Jobs</h2>
+        <div *ngIf="isLoading" class="loading">Loading...</div>
+        <div *ngIf="!isLoading && savedJobs.length === 0" class="no-jobs">
+          <p>You haven't saved any jobs yet.</p>
+          <a routerLink="/jobs" class="btn btn-primary">Browse Jobs</a>
+        </div>
+        <div class="jobs-list" *ngIf="!isLoading && savedJobs.length > 0">
+          <div class="job-item" *ngFor="let job of savedJobs">
+            <h3>{{ job.title }}</h3>
+            <p class="company">{{ job.company }}</p>
+            <div class="job-meta">
+              <span class="location">{{ job.location }}</span>
+              <span class="type">{{ job.type }}</span>
+            </div>
+            <div class="job-actions">
+              <a [routerLink]="['/jobs', job.id]" class="btn btn-outline">View Job</a>
+              <button class="btn btn-danger">Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Applications Tab -->
+      <div *ngIf="activeTab === 'applications'">
+        <h2>My Applications</h2>
+        <!-- Applications list would go here -->
+      </div>
+      
+      <!-- Profile Tab -->
+      <div *ngIf="activeTab === 'profile'">
+        <h2>My Profile</h2>
+        <div class="profile-section">
+          <h3>Skills</h3>
+          <div class="skills">
+            <span class="skill-tag" *ngFor="let skill of profile.skills">{{ skill }}</span>
+          </div>
+        </div>
+        
+        <div class="profile-section">
+          <h3>Resume</h3>
+          <div class="resume">
+            <p>{{ profile.resume }}</p>
+            <button class="btn btn-outline">Upload New Resume</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

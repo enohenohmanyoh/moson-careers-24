@@ -1,0 +1,75 @@
+>
+
+<main class="job-list-page">
+  <div class="container">
+    <div class="page-header">
+      <h1>Browse Jobs</h1>
+      <p>Find your next career opportunity</p>
+    </div>
+    
+    <div class="job-list-container">
+      <aside class="filters">
+        <div class="filter-section">
+          <h3>Search</h3>
+          <input type="text" placeholder="Job title or company" [(ngModel)]="searchTerm" (input)="filterJobs()">
+        </div>
+        
+        <div class="filter-section">
+          <h3>Location</h3>
+          <select [(ngModel)]="locationFilter" (change)="filterJobs()">
+            <option value="">All Locations</option>
+            <option value="Cape Town">Cape Town</option>
+            <option value="Johannesburg">Johannesburg</option>
+            <option value="Durban">Durban</option>
+            <option value="Pretoria">Pretoria</option>
+            <option value="Remote">Remote</option>
+          </select>
+        </div>
+        
+        <div class="filter-section">
+          <h3>Job Type</h3>
+          <select [(ngModel)]="jobTypeFilter" (change)="filterJobs()">
+            <option value="">All Types</option>
+            <option value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+            <option value="Contract">Contract</option>
+            <option value="Internship">Internship</option>
+          </select>
+        </div>
+      </aside>
+      
+      <div class="job-results">
+        <div class="results-count">
+          Showing {{ filteredJobs.length }} jobs
+        </div>
+        
+        <div class="jobs">
+          <div class="job-card" *ngFor="let job of filteredJobs">
+            <div class="job-info">
+              <h2><a [routerLink]="['/jobs', job.id]">{{ job.title }}</a></h2>
+              <p class="company">{{ job.company }}</p>
+              <div class="job-meta">
+                <span class="location">{{ job.location }}</span>
+                <span class="type">{{ job.type }}</span>
+                <span class="salary">{{ job.salary }}</span>
+                <span class="posted">{{ job.posted }}</span>
+              </div>
+              <p class="description">{{ job.description }}</p>
+            </div>
+            <div class="job-actions">
+              <a routerLink="/jobs-details" routerLinkActive="active">View</a>
+              <button class="btn btn-outline">Save Job</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="pagination">
+          <button class="btn btn-outline">Previous</button>
+          <span>Page 1 of 3</span>
+          <button class="btn btn-outline">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+

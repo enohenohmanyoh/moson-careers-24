@@ -1,0 +1,91 @@
+
+
+<main class="employer-dashboard">
+  <div class="container">
+    <div class="dashboard-header">
+      <h1>Employer Dashboard</h1>
+      <button routerLink="/employer/post-job" class="btn btn-primary">Post New Job</button>
+    </div>
+    
+    <div class="dashboard-tabs">
+      <button 
+        [class.active]="activeTab === 'dashboard'" 
+        (click)="switchTab('dashboard')">
+        Dashboard
+      </button>
+      <button 
+        [class.active]="activeTab === 'jobs'" 
+        (click)="switchTab('jobs')">
+        My Jobs
+      </button>
+      <button 
+        [class.active]="activeTab === 'applications'" 
+        (click)="switchTab('applications')">
+        Applications
+      </button>
+      <button 
+        [class.active]="activeTab === 'profile'" 
+        (click)="switchTab('profile')">
+        Company Profile
+      </button>
+    </div>
+    
+    <div class="dashboard-content">
+      <!-- Dashboard Tab -->
+      <div *ngIf="activeTab === 'dashboard'" class="dashboard-overview">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>Total Jobs Posted</h3>
+            <p class="stat-value">{{ stats.totalJobs }}</p>
+          </div>
+          <div class="stat-card">
+            <h3>Active Jobs</h3>
+            <p class="stat-value">{{ stats.activeJobs }}</p>
+          </div>
+          <div class="stat-card">
+            <h3>Applications</h3>
+            <p class="stat-value">{{ stats.applications }}</p>
+          </div>
+        </div>
+        
+        <div class="recent-jobs">
+          <h2>Recent Job Postings</h2>
+          <div *ngIf="isLoading" class="loading">Loading...</div>
+          <div *ngIf="!isLoading && postedJobs.length === 0" class="no-jobs">
+            <p>You haven't posted any jobs yet.</p>
+            <a routerLink="/employer/post-job" class="btn btn-primary">Post Your First Job</a>
+          </div>
+          <div class="jobs-list" *ngIf="!isLoading && postedJobs.length > 0">
+            <div class="job-item" *ngFor="let job of postedJobs.slice(0, 3)">
+              <h3>{{ job.title }}</h3>
+              <div class="job-meta">
+                <span class="applications">{{ job.applications }} applications</span>
+                <span class="status" [class.active]="job.status === 'active'">{{ job.status }}</span>
+              </div>
+              <a [routerLink]="['/employer/job', job.id]" class="btn btn-outline">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Jobs Tab -->
+      <div *ngIf="activeTab === 'jobs'">
+        <h2>My Job Postings</h2>
+        <!-- Job list table would go here -->
+      </div>
+      
+      <!-- Applications Tab -->
+      <div *ngIf="activeTab === 'applications'">
+        <h2>Job Applications</h2>
+        <!-- Applications list would go here -->
+      </div>
+      
+      <!-- Profile Tab -->
+      <div *ngIf="activeTab === 'profile'">
+        <h2>Company Profile</h2>
+        <!-- Profile form would go here -->
+      </div>
+    </div>
+  </div>
+</main>
+

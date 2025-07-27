@@ -1,52 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PropertySliderComponent } from "../../component/property-slider/property-slider.component";
+import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
+  imports: [CommonModule, RouterLink],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-  imports: [CommonModule, PropertySliderComponent]
+  styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-  heroImages: string[] = [
-    '/assets/images/header-image.jpg',
-    '/assets/images/header-image2.jpg',
-    '/assets/images/header-image3.jpg',
-    '/assets/images/header-image4.jpg',
-    '/assets/images/header-image5.jpg',
-    '/assets/images/header-image6.jpg'
+export class HomeComponent {
+  popularCategories = [
+    { name: 'IT & Software', jobs: 1245 },
+    { name: 'Finance', jobs: 892 },
+    { name: 'Healthcare', jobs: 756 },
+    { name: 'Engineering', jobs: 1123 },
+    { name: 'Education', jobs: 543 },
+    { name: 'Marketing', jobs: 678 }
   ];
 
-  heroImages1: string[] = [
-    '/assets/images/sell.jpg',
-    '/assets/images/sell1.jpg',
-    '/assets/images/sell5.jpg',
-    '/assets/images/sell2.jpg',
-    '/assets/images/sell3.jpg',
-    '/assets/images/sell7.jpg',
+  featuredJobs = [
+    { 
+      title: 'Senior Frontend Developer', 
+      company: 'Tech Solutions Inc.', 
+      location: 'Cape Town', 
+      type: 'Full-time', 
+      salary: 'R60,000 - R80,000' 
+    },
+    { 
+      title: 'Financial Analyst', 
+      company: 'Global Finance', 
+      location: 'Johannesburg', 
+      type: 'Full-time', 
+      salary: 'R45,000 - R60,000' 
+    },
+    { 
+      title: 'Nurse Practitioner', 
+      company: 'City Hospital', 
+      location: 'Durban', 
+      type: 'Part-time', 
+      salary: 'R35,000 - R45,000' 
+    }
   ];
-
-  currentImageIndex = 0;
-  currentImageIndex1 = 0;
-
-  ngOnInit(): void {
-    setInterval(() => {
-      this.currentImageIndex = (this.currentImageIndex + 1) % this.heroImages.length;
-    }, 4000);
-
-    setInterval(() => {
-      this.currentImageIndex1 = (this.currentImageIndex1 + 1) % this.heroImages1.length;
-    }, 4000);
-  }
-
-  getHeroBackground(): string {
-    return `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${this.heroImages[this.currentImageIndex]}')`;
-  }
-
-  getHeroBackground1(): string {
-    return `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${this.heroImages1[this.currentImageIndex1]}')`;
-  }
 }
-
