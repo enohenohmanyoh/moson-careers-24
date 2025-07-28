@@ -28,8 +28,8 @@
 
   <div class="sidebar">
     <div class="actions">
-      <button class="apply-button">Apply Now</button>
-      <button class="save-button">Save Job</button>
+      <button class="apply-button" (click)="applyForJob()">Apply Now</button>
+      <button class="save-button" (click)="saveJob()">Save Job</button>
     </div>
 
     <div class="related-jobs">
@@ -37,11 +37,11 @@
       <div class="job-card" *ngFor="let relatedJob of relatedJobs" (click)="viewJobDetails(relatedJob.id)">
         <h4>{{ relatedJob.title }}</h4>
         <div class="job-meta">
-          <span class="company">{{ relatedJob.company }}</span>
-          <span class="location">{{ relatedJob.location }}</span>
-          <span class="job-type">{{ relatedJob.type }}</span>
-          <span class="salary">{{ relatedJob.salary }}</span>
-          <span class="posted">{{ relatedJob.posted }}</span>
+          <span class="company">{{ relatedJob?.company }}</span>
+          <span class="location">{{ relatedJob?.location }}</span>
+          <span class="job-type">{{ relatedJob?.type }}</span>
+          <span class="salary">{{ relatedJob?.salary }}</span>
+          <span class="posted">{{ relatedJob?.posted }}</span>
         </div>
       </div>
     </div>

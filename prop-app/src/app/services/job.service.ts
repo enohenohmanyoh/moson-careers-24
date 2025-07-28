@@ -7,13 +7,17 @@ import { Job } from '../model/job.model';
   providedIn: 'root'
 })
 export class JobService {
-  private apiUrl = 'https://your-api-endpoint.com/api/jobs';
+  private apiUrl = 'http://localhost:8080/api/job';
 
   constructor(private http: HttpClient) { }
 
   // Get all jobs
   getJobs(): Observable<Job[]> {
     return this.http.get<Job[]>(this.apiUrl);
+  }
+
+  getAllJobs(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/all-jobs`);
   }
 
   // Updated to accept both string and number IDs
@@ -50,7 +54,11 @@ export class JobService {
     return this.http.get<Job[]>(`${this.apiUrl}/applications`);
   }
 
-  applyToJob(jobId: string | number, applicationData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${jobId}/apply`, applicationData);
+  applyForJob(userEmail: string, jobReference: any): Observable<any> {
+    return this.http.post(` http://localhost:8080/api/user/apply-for-job?userEmail=t${userEmail}&jobReference=${jobReference}`,{});
+  }
+
+  saveJob(userEmail: string, jobReference: any): Observable<any> {
+    return this.http.post(` http://localhost:8080/api/user/save-job?userEmail=t${userEmail}&jobReference=${jobReference}`,{});
   }
 }
