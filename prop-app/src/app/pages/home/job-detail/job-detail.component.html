@@ -5,14 +5,25 @@
       <div class="job-meta">
         <span class="company">{{ job.company }}</span>
         <span class="location">{{ job.location }}</span>
-        <span class="job-type">{{ job.type }}</span>
+        <span class="type" *ngFor="let type of job.jobTypes" class="type-badge">
+                   {{ this.formatJobType(type) }},
+          </span>
         <span class="salary">{{ job.salary }}</span>
-        <span class="posted">{{ job.posted }}</span>
+        <span class="posted">{{ job.createdAt | date:'mediumDate' }}</span>
       </div>
     </div>
 
     <div class="job-description" [innerHTML]="job.description"></div>
-
+    <div class="job-description">
+      <h3>Required Skills:</h3>
+      <ul>
+        <li *ngFor="let requiredSkill of job.requiredSkills">{{ requiredSkill }}</li>
+      </ul>
+      <h3>Responsibilities:</h3>
+      <ul>
+        <li *ngFor="let responsibility of job.responsibilities">{{ responsibility }}</li>
+      </ul>
+    </div>
     <div class="company-section">
       <h2>About the Company</h2>
       <div class="company-description" [innerHTML]="job.companyDescription"></div>
@@ -20,9 +31,9 @@
 
     <div class="benefits-section">
       <h2>Benefits</h2>
-      <ul class="benefits-list">
+      <ol class="benefits-list">
         <li *ngFor="let benefit of job.benefits">{{ benefit }}</li>
-      </ul>
+      </ol>
     </div>
   </div>
 
@@ -39,9 +50,11 @@
         <div class="job-meta">
           <span class="company">{{ relatedJob?.company }}</span>
           <span class="location">{{ relatedJob?.location }}</span>
-          <span class="job-type">{{ relatedJob?.type }}</span>
+          <span class="type" *ngFor="let type of job.jobTypes" class="type-badge">
+                   {{ this.formatJobType(type) }},
+          </span>
           <span class="salary">{{ relatedJob?.salary }}</span>
-          <span class="posted">{{ relatedJob?.posted }}</span>
+          <span class="posted">{{ job.createdAt | date:'mediumDate' }}</span>
         </div>
       </div>
     </div>
