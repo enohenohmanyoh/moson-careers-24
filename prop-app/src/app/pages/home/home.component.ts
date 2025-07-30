@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {JobService} from "../../services/job.service";
 import {SweetAlertMessage} from "../../services/sweet.alert";
 import {HttpClientModule} from "@angular/common/http";
@@ -31,27 +31,14 @@ export class HomeComponent implements OnInit {
       location: 'Cape Town',
       type: 'Full-time',
       salary: 'R60,000 - R80,000'
-    },
-    {
-      title: 'Financial Analyst',
-      company: 'Global Finance',
-      location: 'Johannesburg',
-      type: 'Full-time',
-      salary: 'R45,000 - R60,000'
-    },
-    {
-      title: 'Nurse Practitioner',
-      company: 'City Hospital',
-      location: 'Durban',
-      type: 'Part-time',
-      salary: 'R35,000 - R45,000'
     }
   ];
   jobs: any[] = [];
   locationFilter: string = ''
   searchTerm: string = ''
 
-  constructor(private jobService: JobService, private sweetAlertMessage: SweetAlertMessage) {
+  constructor(private jobService: JobService, private sweetAlertMessage: SweetAlertMessage,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -101,5 +88,9 @@ export class HomeComponent implements OnInit {
     } else {
       this.jobsList = [...this.jobs];
     }
+  }
+
+  viewJob(job: any): void{
+    this.router.navigate(['/jobs-details/', job.reference])
   }
 }
