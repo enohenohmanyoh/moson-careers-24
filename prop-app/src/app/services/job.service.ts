@@ -67,10 +67,10 @@ export class JobService {
   }
 
   applyForJob(userEmail: string, jobReference: any): Observable<any> {
-    return this.http.post(` http://localhost:8080/api/user/apply-for-job?userEmail=t${userEmail}&jobReference=${jobReference}`, {});
+    return this.http.post(` http://localhost:8080/api/user/apply-for-job?userEmail=${userEmail}&jobReference=${jobReference}`, {});
   }
 
   saveJob(userEmail: string, jobReference: any): Observable<any> {
-    return this.http.post(` http://localhost:8080/api/user/save-job?userEmail=t${userEmail}&jobReference=${jobReference}`, {});
+    return this.http.post(` http://localhost:8080/api/user/save-job?userEmail=${userEmail}&jobReference=${jobReference}`, {});
   }
 }

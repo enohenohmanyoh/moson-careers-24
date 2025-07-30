@@ -69,7 +69,7 @@
             </div>
             <div class="job-actions">
               <a [routerLink]="['/jobs-details', job.reference]" routerLinkActive="active">View</a>
-              <button class="btn btn-outline">Save Job</button>
+              <button class="btn btn-outline" (click)="saveJob(job)">Save Job</button>
             </div>
           </div>
         </div>

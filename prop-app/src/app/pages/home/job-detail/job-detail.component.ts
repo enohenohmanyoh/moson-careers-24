@@ -4,17 +4,19 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {JobService} from "../../../services/job.service";
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {SweetAlertMessage} from "../../../services/sweet.alert";
 
 @Component({
   selector: 'app-job-detail',
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule],
-  providers: [JobService],
+  providers: [JobService, SweetAlertMessage],
   templateUrl: './job-detail.component.html',
   styleUrls: ['./job-detail.component.css']
 })
 export class JobDetailComponent implements OnInit {
   job: any = {}
+  userEmail: string | null = '';
 
   relatedJobs = [
     {
@@ -41,15 +43,15 @@ export class JobDetailComponent implements OnInit {
     }
   ];
 
-  constructor(private router: Router, private activedRouter: ActivatedRoute, private jobService: JobService) {
+  constructor(private router: Router, private activedRouter: ActivatedRoute, private jobService: JobService,
+              private sweetAlertMessage: SweetAlertMessage) {
+
 
   }
 
-  viewJobDetails(jobId: number) {
-    this.router.navigate(['/jobs', jobId]);
-  }
 
   ngOnInit() {
+    this.getUserLocalStorage();
     let reference = this.activedRouter.snapshot.paramMap.get('reference')!;
     this.viewJobByReference(reference);
   }
@@ -58,8 +60,9 @@ export class JobDetailComponent implements OnInit {
     this.jobService.getJobByJobReference(reference).subscribe(response => {
       this.job = response.data;
     }, error => {
-      console.log(error);
-    })
+      const errorMessage = error?.error?.error
+      this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');
+    });
   }
 
   formatJobType(type: string): string {
@@ -74,23 +77,50 @@ export class JobDetailComponent implements OnInit {
     }
   }
 
-  applyForJob() {
-    let userEmail = ""
-    let jobReference = ""
-    this.jobService.applyForJob(userEmail, jobReference).subscribe(data => {
+  getUserLocalStorage() {
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('userEmail', 'embottabi@gmail.com');
 
-    }, error => {
-
-    })
+      this.userEmail = window.localStorage.getItem('userEmail');
+    }
   }
 
-  saveJob() {
-    let userEmail = ""
-    let jobReference = ""
-    this.jobService.saveJob(userEmail, jobReference).subscribe(data => {
 
-    }, error => {
-      console.log(error)
-    })
+  saveJob(job: any) {
+    if (this.userEmail) {
+      this.jobService.saveJob(this.userEmail, job.reference).subscribe(response => {
+        if (response?.status == 201) {
+          this.sweetAlertMessage.bannerMessage('Successfully saved job!', 'success');
+        }
+
+      }, error => {
+        const errorMessage = error?.error?.error
+        this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');
+      });
+    } else {
+      this.sweetAlertMessage.bannerMessage('Login to saved job!', 'warning');
+    }
   }
+
+
+  applyForJob(job: any) {
+    if (this.userEmail) {
+      this.jobService.applyForJob(this.userEmail, job.reference).subscribe(response => {
+        if (response?.status == 201) {
+          this.sweetAlertMessage.bannerMessage('Successfully applied job!', 'success');
+        }
+
+      }, error => {
+        const errorMessage = error?.error?.error
+        this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');
+      });
+    } else {
+      this.sweetAlertMessage.bannerMessage('Login to apply for job!', 'warning');
+    }
+  }
+
+  viewJobDetails(jobId: number) {
+    this.router.navigate(['/jobs', jobId]);
+  }
+
 }
