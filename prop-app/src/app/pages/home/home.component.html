@@ -2,40 +2,48 @@
 
 <main>
   <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1>Find Your Dream Job Today</h1>
-        <p>Thousands of jobs available. Find yours now.</p>
-        
-        <div class="search-box">
-          <input type="text" placeholder="Job title, keywords">
-          <input type="text" placeholder="Location">
-          <button class="btn btn-primary">Search Jobs</button>
-        </div>
-      </div>
-    </div>
-  </section>
+  <<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">Find Your Dream Job Today</h1>
+      <p class="hero-subtitle">Thousands of jobs available. Start your search now.</p>
 
-  <!-- Popular Categories -->
-  <section class="categories">
-    <div class="container">
-      <h2>Popular Categories</h2>
-      <div class="category-grid">
-        <div class="category-card" *ngFor="let category of popularCategories">
-          <h3>{{ category.name }}</h3>
-          <p>{{ category.jobs }} Jobs</p>
-        </div>
+      <div class="search-box">
+        <!-- Search Input -->
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search by Job title & Company"
+          [(ngModel)]="searchTerm" (input)="filterJobs()"
+        />
+
+        <!-- Location Filter -->
+        <select
+          class="location-select"
+          [(ngModel)]="locationFilter"
+          (change)="filterJobsByLocation()"
+        >
+          <option value="">All Locations</option>
+          <option value="Cape Town">Cape Town</option>
+          <option value="Johannesburg">Johannesburg</option>
+          <option value="Durban">Durban</option>
+          <option value="Pretoria">Pretoria</option>
+          <option value="Remote">Remote</option>
+        </select>
+
+        <!-- Search Button -->
+        <button class="btn btn-primary" >Search Jobs</button>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Featured Jobs -->
   <section class="featured-jobs">
     <div class="container">
       <h2>Featured Jobs</h2>
       <div class="jobs-grid">
-        <div class="job-card" *ngFor="let job of featuredJobs">
+        <div class="job-card" *ngFor="let job of jobsList">
           <h3>{{ job.title }}</h3>
           <p class="company">{{ job.company }}</p>
           <div class="job-details">
@@ -47,10 +55,27 @@
         </div>
       </div>
       <div class="cta">
-        <a routerLink="/jobs" class="btn btn-primary">Browse All Jobs</a>
+        <a routerLink="/list-jobs" class="btn btn-primary">Browse All Jobs</a>
       </div>
     </div>
   </section>
+
+  <!-- Popular Categories -->
+  <section class="categories">
+    <div class="container">
+      <div class="cta">
+        <a routerLink="/list-jobs" class="btn btn-primary">Browse All Jobs</a>
+      </div>
+      <h2>Popular Categories</h2>
+      <div class="category-grid">
+        <div class="category-card" *ngFor="let category of popularCategories">
+          <h3>{{ category.name }}</h3>
+          <p>{{ category.jobs }} Jobs</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
   <!-- Call to Action -->
   <section class="cta-section">

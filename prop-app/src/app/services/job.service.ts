@@ -17,8 +17,9 @@ export class JobService {
     return this.http.get<Job[]>(this.apiUrl);
   }
 
-  getAllJobs(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/all-jobs`);
+  getAllJobs(search: string = ''): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/all-jobs${search? search: ''}`);
+
   }
 
   getJobByJobReference(reference: string): Observable<any> {
