@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {FormsModule} from '@angular/forms';
@@ -17,13 +17,13 @@ import {Jobs} from "../../model/jobs.model";
 export class JobListComponent implements OnInit {
   jobs: any[] = [];
 
-  filteredJobs = [...this.jobs];
+  filteredJobs: any = [];
   searchTerm = '';
   locationFilter = '';
   jobTypeFilter = '';
   jobsList: Jobs[] = [];
 
-  constructor(private jobService: JobService) {
+  constructor(private jobService: JobService, private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -78,18 +78,27 @@ export class JobListComponent implements OnInit {
   }
 
   filterJobs() {
-    if (this.searchTerm && this.searchTerm.length > 3) {
-      let filteredJobs = this.jobs.filter(job => {
-        const matchesSearch = job.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-          job.company.toLowerCase().includes(this.searchTerm.toLowerCase());
-        const matchesLocation = this.locationFilter ? job.location.toLowerCase() === this.locationFilter.toLowerCase() : true;
-        const matchesType = this.jobTypeFilter ? job.type.toLowerCase() === this.jobTypeFilter.toLowerCase() : true;
+    // If there is a search term and it's at least 2 characters, filter
+    if (this.searchTerm && this.searchTerm.trim().length >= 2) {
+      const search = this.searchTerm.toLowerCase();
+      const filtered: any[] = []; // clear previous results
 
-        return matchesSearch && matchesLocation && matchesType;
-      }).map(job => job);
-      this.filteredJobs = filteredJobs;
+      this.jobs.forEach((job, index) => {
+        if (
+          job.title.toLowerCase().includes(search) ||
+          job.company.toLowerCase().includes(search)
+        ) {
+          filtered.push(job); // push matching jobs
+          console.log('index', index, job)
+        }
+      });
+      this.jobsList = [...filtered];
+      this.cd.markForCheck();
+    } else {
+      this.jobsList = [...this.jobs];
     }
   }
+
 
   saveJob(job: any) {
     console.log('Saved job:', job.title);
