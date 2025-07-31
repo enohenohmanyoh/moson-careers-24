@@ -56,9 +56,10 @@ export class ListCourseComponent implements OnInit {
   }
 
   deleteCourse(courseId: string): void {
-    this.courseService.getCourseById(courseId).subscribe(response => {
+    this.courseService.deleteCourseById(courseId).subscribe(response => {
       this.sweetAlertMessage.bannerMessage('Course Deactivated Successfully', 'success');
-    }, error => {
+    this.getCourses();
+      }, error => {
       const errorMessage = error.error.error
       this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');
     });
