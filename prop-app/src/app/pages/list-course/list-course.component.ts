@@ -30,7 +30,6 @@ export class ListCourseComponent implements OnInit {
 
   getCourses(): void {
     this.courseService.getAllCourses(0, 25, 'createdAt,desc').subscribe(response => {
-      console.log('Course', response);
       this.courseList = response?.data?.content;
       this.courses = response?.data?.content;
     }, error => {

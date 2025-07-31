@@ -43,8 +43,6 @@ export class CourseComponent {
 
   ngOnInit() {
     this.getUserLocalStorage();
-
-    console.log('existingCourse', this.existingCourse)
     if (this.existingCourse) {
       this.course = JSON.parse(JSON.stringify(this.existingCourse)); // Deep copy for edit
       this.isEditMode = true;
@@ -76,7 +74,6 @@ export class CourseComponent {
 
   getCourseById(id: string) {
     this.courseService.getCourseById(id).subscribe(response => {
-      console.log('response', response)
      this.course =  response.data;
     }, error => {
       const errorMessage = error?.error?.error;
@@ -87,8 +84,6 @@ export class CourseComponent {
   onSubmit() {
     this.course.userEmail = this.userEmail;
     if (this.isEditMode || this.course.id) {
-      console.log('Updating course:', this.course);
-      // Call update API here
       this.courseService.updateCourse(this.course).subscribe(response => {
         this.sweetAlertMessage.showSuccessMessage('Successfully Updated Course').then(data => {
           this.routeToCourse()
@@ -98,8 +93,6 @@ export class CourseComponent {
         this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');
       });
     } else {
-
-      console.log('Creating course:', this.course);
       this.courseService.createCourse(this.course).subscribe(response => {
         this.sweetAlertMessage.showSuccessMessage('Successfully Created Course').then(data => {
           this.routeToCourse()
