@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
   }
 
   getAllJobs(): void {
-    this.jobService.getAllJobs('?page=0&size=5&sort=createdAt,desc').subscribe(response => {
+    this.jobService.getAllJobs('?page=0&size=25&sort=createdAt,desc').subscribe(response => {
       this.jobsList = response?.data?.content;
       this.jobs = response?.data?.content;
     }, error => {
@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
 
   filterJobsByLocation(): void {
     if (this.locationFilter) {
-      this.jobService.getAllJobsByLocation(`${this.locationFilter}&page=0&size=5&sort=createdAt,desc`).subscribe(response => {
+      this.jobService.getAllJobsByLocation(`${this.locationFilter}&page=0&size=25&sort=createdAt,desc`).subscribe(response => {
         this.jobsList = response?.data?.content;
         this.jobs = response?.data?.content;
       }, error => {
