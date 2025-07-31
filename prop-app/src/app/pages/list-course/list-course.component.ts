@@ -29,9 +29,11 @@ export class ListCourseComponent implements OnInit {
   }
 
   getCourses(): void {
+    this.sweetAlertMessage.showLoading();
     this.courseService.getAllCourses(0, 25, 'createdAt,desc').subscribe(response => {
       this.courseList = response?.data?.content;
       this.courses = response?.data?.content;
+      this.sweetAlertMessage.closeBox();
     }, error => {
       const errorMessage = error.error.error
       this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');
@@ -71,6 +73,7 @@ export class ListCourseComponent implements OnInit {
   }
 
   deleteCourse(courseId: string): void {
+    this.sweetAlertMessage.showLoading();
     this.courseService.deleteCourseById(courseId).subscribe(response => {
       this.sweetAlertMessage.bannerMessage('Course Deactivated Successfully', 'success');
     this.getCourses();

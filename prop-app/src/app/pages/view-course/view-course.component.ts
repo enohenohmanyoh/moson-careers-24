@@ -43,8 +43,10 @@ export class ViewCourseComponent implements OnInit {
   }
 
   getCourseById(id: string) {
+    this.sweetAlertMessage.showLoading();
     this.courseService.getCourseById(id).subscribe(response => {
       this.course = response.data;
+      this.sweetAlertMessage.closeBox();
     }, error => {
       const errorMessage = error?.error?.error;
       this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');

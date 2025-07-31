@@ -35,9 +35,11 @@ export class JobListComponent implements OnInit {
   }
 
   getAllJobs(): void {
+    this.sweetAlertMessage.showLoading();
     this.jobService.getAllJobs().subscribe(response => {
       this.jobsList = response?.data?.content;
       this.jobs = response?.data?.content;
+      this.sweetAlertMessage.closeBox();
     }, error => {
       const errorMessage = error.error.error
       this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');
@@ -58,9 +60,11 @@ export class JobListComponent implements OnInit {
 
   filterJobsByLocation(): void {
     if (this.locationFilter) {
+      this.sweetAlertMessage.showLoading();
       this.jobService.getAllJobsByLocation(this.locationFilter).subscribe(response => {
         this.jobsList = response?.data?.content;
         this.jobs = response?.data?.content;
+        this.sweetAlertMessage.closeBox();
       }, error => {
         const errorMessage = error.error.error
         this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');
@@ -72,9 +76,11 @@ export class JobListComponent implements OnInit {
 
   filterJobsByJobType(): void {
     if (this.jobTypeFilter) {
+      this.sweetAlertMessage.showLoading();
       this.jobService.getAllJobsByJobType([this.jobTypeFilter]).subscribe(response => {
         this.jobsList = response?.data?.content;
         this.jobs = response?.data?.content;
+        this.sweetAlertMessage.closeBox();
       }, error => {
         const errorMessage = error.error.error
         this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');
@@ -106,6 +112,7 @@ export class JobListComponent implements OnInit {
 
 
   saveJob(job: any) {
+    this.sweetAlertMessage.showLoading();
     if (this.userEmail) {
       this.jobService.saveJob(this.userEmail, job.reference).subscribe(response => {
         if (response?.status == 201) {

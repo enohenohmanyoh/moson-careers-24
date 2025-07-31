@@ -32,7 +32,7 @@ export class AboutComponent {
   }
 
   onSubmit() {
-
+    this.sweetAlertMessage.showLoading();
     if (this.isValidEmail(this.contactData.email)) {
       this.contactService.sendMail(this.contactData).subscribe(response => {
         this.sweetAlertMessage.bannerMessage('Email sent successful', 'success')

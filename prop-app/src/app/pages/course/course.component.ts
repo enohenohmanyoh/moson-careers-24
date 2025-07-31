@@ -72,8 +72,10 @@ export class CourseComponent {
   }
 
   getCourseById(id: string) {
+    this.sweetAlertMessage.showLoading();
     this.courseService.getCourseById(id).subscribe(response => {
      this.course =  response.data;
+      this.sweetAlertMessage.closeBox();
     }, error => {
       const errorMessage = error?.error?.error;
       this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');
@@ -81,6 +83,7 @@ export class CourseComponent {
   }
 
   onSubmit() {
+    this.sweetAlertMessage.showLoading();
     this.course.userEmail = this.userEmail;
     if (this.isEditMode || this.course.id) {
       this.courseService.updateCourse(this.course).subscribe(response => {
