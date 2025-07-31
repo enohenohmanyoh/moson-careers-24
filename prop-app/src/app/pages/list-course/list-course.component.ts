@@ -39,7 +39,21 @@ export class ListCourseComponent implements OnInit {
   }
 
   filterCourses(): void {
+    if (this.searchTerm && this.searchTerm.trim().length >= 2) {
+      const search = this.searchTerm.toLowerCase();
+      const filtered: any[] = [];
 
+      this.courses.forEach((course, index) => {
+        if (
+            course.title.toLowerCase().includes(search)
+        ) {
+          filtered.push(course);
+        }
+      });
+      this.courseList = [...filtered];
+    } else {
+      this.courseList = [...this.courses];
+    }
   }
 
   createCourse(): void {
