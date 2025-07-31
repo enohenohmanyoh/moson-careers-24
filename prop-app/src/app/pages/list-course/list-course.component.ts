@@ -47,11 +47,13 @@ export class ListCourseComponent implements OnInit {
   }
 
   viewCourse(course: any): void {
-
+    console.log("View Course")
+    this.router.navigate([`/courses/view/${course.id}`]).then();
   }
 
   editCourse(course: any): void {
-    this.router.navigate([`/courses/edit/${course.id}`, course]);
+    console.log("Edit Course")
+    this.router.navigate([`/courses/edit/${course.id}`, course]).then();
   }
 
   deleteCourse(courseId: string): void {

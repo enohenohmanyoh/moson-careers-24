@@ -1,0 +1,74 @@
+<div class="mt-60">`</div>
+<div class="course-view-container" *ngIf="course">
+  <!-- Course Header -->
+  <div class="course-header">
+    <img [src]="course.thumbnailUrl || './assets/images/course/course1.jpg'"
+         alt="{{ course.title }}"
+         class="thumbnail" />
+    <div class="course-info">
+      <h1>{{ course.title }}</h1>
+      <p class="description">{{ course.description }}</p>
+      <div class="meta">
+        <span class="meta-item"><i class="fas fa-tag"></i> {{ course.category }}</span>
+        <span class="meta-item"><i class="fas fa-clock"></i> {{ course.duration }}</span>
+        <span class="meta-item"><i class="fas fa-signal"></i> {{ course.level }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Course Body -->
+  <div class="modules-container">
+    <!-- Modules Navigation -->
+    <div class="modules-list">
+      <h3>📚 Course Modules</h3>
+      <ul>
+        <li
+          *ngFor="let module of course.modules; let i = index"
+          [class.active]="i === selectedModuleIndex"
+          (click)="selectModule(i)">
+          <span class="module-number">{{ i + 1 }}</span>
+          <span class="module-title">{{ module.title }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Module Details -->
+    <div class="module-content" *ngIf="course.modules[selectedModuleIndex] as selectedModule">
+      <h2>{{ selectedModule.title }}</h2>
+      <p>{{ selectedModule.description }}</p>
+
+      <!-- Video -->
+      <div class="video-container" *ngIf="selectedModule.videoUrl">
+        <!-- Check if it's a YouTube link -->
+        <iframe
+          *ngIf="selectedModule.videoUrl.includes('youtube.com') || selectedModule.videoUrl.includes('youtu.be')"
+          [src]="getSafeYouTubeUrl(selectedModule.videoUrl)"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+
+        <!-- If it's a normal video file -->
+        <video *ngIf="!(selectedModule.videoUrl.includes('youtube.com') || selectedModule.videoUrl.includes('youtu.be'))"
+               controls [src]="selectedModule.videoUrl"></video>
+      </div>
+
+      <!-- Materials -->
+      <div class="materials" *ngIf="selectedModule.materials.length > 0">
+        <h4>📂 Download Materials:</h4>
+        <ul>
+          <li *ngFor="let material of selectedModule.materials">
+            <a [href]="material" target="_blank">
+              <i class="fas fa-file-download"></i> {{ material.split('/').pop() }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tutor Info -->
+      <div class="tutor-info">
+        <h3>👩‍🏫 About the Tutor</h3>
+        <p>{{ course.aboutTutor }}</p>
+      </div>
+    </div>
+  </div>
+</div>

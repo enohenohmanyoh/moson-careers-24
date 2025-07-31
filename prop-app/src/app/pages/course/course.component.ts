@@ -44,7 +44,6 @@ export class CourseComponent {
   ngOnInit() {
     this.getUserLocalStorage();
     if (this.existingCourse) {
-      this.course = JSON.parse(JSON.stringify(this.existingCourse)); // Deep copy for edit
       this.isEditMode = true;
       this.getCourseById(this.existingCourse);
     }

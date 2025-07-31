@@ -1,39 +1,40 @@
 <div class="course-list-container">
-  <h2>Available Courses</h2>
+    <h2>Available Courses</h2>
 
-  <!-- Search Filter -->
-  <div class="search-bar">
-    <input type="text" placeholder="Search courses..." [(ngModel)]="searchTerm" (input)="filterCourses()"/>
-    <button class="btn btn-primary" (click)="createCourse()">+ Add New Course</button>
-  </div>
-
-  <!-- Courses Cards -->
-  <div class="courses-grid" *ngIf="courseList.length > 0; else noCourses">
-    <div class="course-card" *ngFor="let course of courseList">
-      <div class="course-thumbnail">
-        <img src="../../../assets/images/course/course1.jpg" alt="{{ course.title }}">
-      </div>
-      <div class="course-info">
-        <h3>{{ course.title }}</h3>
-        <p class="category">{{ course.category }}</p>
-        <p class="level">Level: {{ course.level }}</p>
-        <p class="duration">Duration: {{ course.duration }}</p>
-        <p class="price">Price: <strong>{{ course.price }}</strong></p>
-        <span class="status" [class.active]="course.status === 'ACTIVE'">{{ course.status }}</span>
-      </div>
-
-      <!-- Actions -->
-      <div class="course-actions">
-        <button class="btn btn-sm btn-outline" (click)="viewCourse(course)">View</button>
-
-          <button class="btn btn-sm btn-outline" (click)="editCourse(course)">Edit</button>
-          <button class="btn btn-sm btn-danger" (click)="deleteCourse(course.id)">Deactivate</button>
-
-      </div>
+    <!-- Search Filter -->
+    <div class="search-bar">
+        <input type="text" placeholder="Search courses..." [(ngModel)]="searchTerm" (input)="filterCourses()"/>
+        <button class="btn btn-primary" (click)="createCourse()">+ Add New Course</button>
     </div>
-  </div>
 
-  <ng-template #noCourses>
-    <p class="no-courses">No courses found.</p>
-  </ng-template>
+    <!-- Courses Cards -->
+    <div class="courses-grid" *ngIf="courseList.length > 0; else noCourses">
+        <div class="course-card" *ngFor="let course of courseList">
+            <div class="course-thumbnail">
+                <img src="../../../assets/images/course/course1.jpg" alt="{{ course.title }}">
+            </div>
+            <div class="course-info">
+                <h3>{{ course.title }}</h3>
+                <p class="category">{{ course.category }}</p>
+                <p class="level">Level: {{ course.level }}</p>
+                <p class="duration">Duration: {{ course.duration }}</p>
+                <p class="price">Price: <strong>{{ course.price }}</strong></p>
+                <span class="status" [class.active]="course.status === 'ACTIVE'">{{ course.status }}</span>
+            </div>
+
+            <!-- Actions -->
+            <div class="course-actions">
+
+
+                <button class="btn btn-sm btn-outline" (click)="viewCourse(course)">View</button>
+                <button class="btn btn-sm btn-outline" (click)="editCourse(course)">Edit</button>
+                <button class="btn btn-sm btn-danger" (click)="deleteCourse(course.id)">Deactivate</button>
+
+            </div>
+        </div>
+    </div>
+
+    <ng-template #noCourses>
+        <p class="no-courses">No courses found.</p>
+    </ng-template>
 </div>

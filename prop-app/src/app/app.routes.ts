@@ -4,6 +4,7 @@ import { JobListComponent } from './pages/job-list/job-list.component';
 import { JobDetailComponent } from './pages/home/job-detail/job-detail.component';
 import {CourseComponent} from "./pages/course/course.component";
 import {ListCourseComponent} from "./pages/list-course/list-course.component";
+import {ViewCourseComponent} from "./pages/view-course/view-course.component";
 
 
 export const routes: Routes = [
@@ -12,7 +13,8 @@ export const routes: Routes = [
   {path: 'jobs-details/:reference', component: JobDetailComponent},
   {path: 'courses', component: ListCourseComponent},
   { path: 'courses/create', component: CourseComponent },
-  { path: 'courses/edit/:courseId', component: CourseComponent }
+  { path: 'courses/edit/:courseId', component: CourseComponent },
+  { path: 'courses/view/:courseId', component: ViewCourseComponent }
 
 
 //{ path: '**', redirectTo: '' },
