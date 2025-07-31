@@ -43,7 +43,7 @@ export class JobDetailComponent implements OnInit {
     }
   ];
 
-  constructor(private router: Router, private activedRouter: ActivatedRoute, private jobService: JobService,
+  constructor(private router: Router, private activatedRouter: ActivatedRoute, private jobService: JobService,
               private sweetAlertMessage: SweetAlertMessage) {
 
 
@@ -52,7 +52,7 @@ export class JobDetailComponent implements OnInit {
 
   ngOnInit() {
     this.getUserLocalStorage();
-    let reference = this.activedRouter.snapshot.paramMap.get('reference')!;
+    let reference = this.activatedRouter.snapshot.paramMap.get('reference')!;
     this.viewJobByReference(reference);
   }
 

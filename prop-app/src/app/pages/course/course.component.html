@@ -1,0 +1,93 @@
+<div class="mt-60"></div>
+
+<div class="course-form-container">
+  <h2>{{ isEditMode ? 'Update Course' : 'Create Course' }}</h2>
+
+  <form (ngSubmit)="onSubmit()" #courseForm="ngForm">
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" name="title" [(ngModel)]="course.title" required />
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea class="width-100" name="description" [(ngModel)]="course.description" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Category</label>
+      <input type="text" name="category" [(ngModel)]="course.category" required />
+    </div>
+
+    <div class="form-group">
+      <label>Duration</label>
+      <input type="text" name="duration" [(ngModel)]="course.duration" required />
+    </div>
+
+    <div class="form-group">
+      <label>Level</label>
+      <select class="width-100"  name="level" [(ngModel)]="course.level">
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Advanced">Advanced</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Price</label>
+      <input type="text" name="price" [(ngModel)]="course.price" required />
+    </div>
+
+    <div class="form-group">
+      <label>Language</label>
+      <input type="text" name="language" [(ngModel)]="course.language" required />
+    </div>
+
+<!--    <div class="form-group">-->
+<!--      <label>Thumbnail URL</label>-->
+<!--      <input type="text" name="thumbnailUrl" [(ngModel)]="course.thumbnailUrl" />-->
+<!--    </div>-->
+    <div class="form-group">
+      <label>Tutor</label>
+      <input type="text" name="createdBy" [(ngModel)]="course.createdBy" />
+    </div>
+
+    <div class="form-group">
+      <label>About Tutor</label>
+      <textarea class="width-100" name="aboutTutor" [(ngModel)]="course.aboutTutor"></textarea>
+    </div>
+
+    <!-- MODULES -->
+    <div class="modules-section">
+      <h3>Modules</h3>
+      <div *ngFor="let module of course.modules; let i = index" class="module-item">
+        <h4>Module {{ i + 1 }}</h4>
+        <input placeholder="Title" [(ngModel)]="module.title" name="module-title-{{i}}" required />
+        <input placeholder="Order" type="number" [(ngModel)]="module.order" name="module-order-{{i}}" required />
+        <textarea class="width-90" placeholder="Description" [(ngModel)]="module.description" name="module-desc-{{i}}" required></textarea>
+        <input placeholder="Video URL" [(ngModel)]="module.videoUrl" name="module-video-{{i}}" required />
+
+        <!-- Materials -->
+        <div class="materials">
+          <label>Materials</label>
+          <div *ngFor="let material of module.materials; let j = index" class="material-item">
+            <input placeholder="Material URL" [(ngModel)]="module.materials[j]" name="material-{{i}}-{{j}}" />
+            <button type="button" (click)="removeMaterial(i, j)">Remove</button>
+          </div>
+          <button type="button" (click)="addMaterial(i)">+ Add Material</button>
+        </div>
+
+        <button type="button" (click)="removeModule(i)">Remove Module</button>
+      </div>
+      <button type="button" (click)="addModule()">+ Add Module</button>
+    </div>
+
+    <div class="actions submit-button">
+      <button type="reset" class="btn btn-secondary">Cancel</button>
+      <button type="submit" class="btn btn-primary">
+        {{ isEditMode ? 'Update Course' : 'Create Course' }}
+      </button>
+    </div>
+
+  </form>
+</div>

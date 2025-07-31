@@ -1,0 +1,145 @@
+.course-list-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Search bar */
+.search-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.search-bar .btn-primary {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.search-bar .btn-primary:hover {
+  background: #0056b3;
+}
+
+/* Grid with max 4 columns */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Max 4 columns if space allows */
+  gap: 20px;
+}
+
+/* Course Card */
+.course-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.course-thumbnail img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.course-info {
+  padding: 15px;
+}
+
+.course-info h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: #333;
+}
+
+.course-info .category,
+.course-info .level,
+.course-info .duration,
+.course-info .price {
+  font-size: 13px;
+  color: #666;
+  margin: 2px 0;
+}
+
+.status {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  background: #ccc;
+}
+
+.status.active {
+  background: #28a745;
+  color: #fff;
+}
+
+/* Buttons Styling */
+.course-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 15px;
+  border-top: 1px solid #eee;
+  gap: 6px;
+}
+
+.course-actions .btn-sm {
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  transition: all 0.3s;
+}
+
+.course-actions .btn-outline {
+  background: #f8f9fa;
+  border: 1px solid #ccc;
+}
+
+.course-actions .btn-outline.view:hover {
+  background: #17a2b8;
+  color: #fff;
+}
+
+.course-actions .btn-outline.edit:hover {
+  background: #ffc107;
+  color: #fff;
+}
+
+.course-actions .btn-danger {
+  background: #dc3545;
+  color: #fff;
+}
+
+.course-actions .btn-danger:hover {
+  background: #b02a37;
+}
+
+.no-courses {
+  text-align: center;
+  margin-top: 20px;
+}

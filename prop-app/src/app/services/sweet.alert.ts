@@ -8,7 +8,7 @@ export class SweetAlertMessage {
 
 
   showSuccessMessage(message: string) {
-    Swal.fire({
+    return Swal.fire({
       title: "Success",
       text: message,
       icon: "success"
