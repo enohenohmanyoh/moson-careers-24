@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {JobService} from "../../services/job.service";
 import {HttpClientModule} from "@angular/common/http";
@@ -26,7 +26,7 @@ export class JobListComponent implements OnInit {
   userEmail: string | null = '';
 
 
-  constructor(private jobService: JobService, private sweetAlertMessage: SweetAlertMessage) {
+  constructor(private  router: Router, private jobService: JobService, private sweetAlertMessage: SweetAlertMessage) {
   }
 
   ngOnInit() {
@@ -110,6 +110,9 @@ export class JobListComponent implements OnInit {
     }
   }
 
+  viewJob(job: any){
+    this.router.navigate(['/jobs-details/', job.reference]);
+  }
 
   saveJob(job: any) {
     this.sweetAlertMessage.showLoading();

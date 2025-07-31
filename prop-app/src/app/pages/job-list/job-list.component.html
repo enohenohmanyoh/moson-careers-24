@@ -68,8 +68,13 @@
               <p class="description">{{ job.description }}</p>
             </div>
             <div class="job-actions">
-              <a [routerLink]="['/jobs-details', job.reference]" routerLinkActive="active">View</a>
-              <button class="btn btn-outline" (click)="saveJob(job)">Save Job</button>
+<!--              <a [routerLink]="['/jobs-details', job.reference]" routerLinkActive="active">View</a>-->
+              <button class="btn-view-details" (click)="viewJob(job)">
+                <span>🔍</span> View Details
+              </button>
+              <button class="btn-save-job" (click)="saveJob(job)">
+                <span>💾</span> Save Job
+              </button>
             </div>
           </div>
         </div>

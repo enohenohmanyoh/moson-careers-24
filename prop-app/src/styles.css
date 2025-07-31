@@ -2,3 +2,56 @@
 .mt-60{
   margin-bottom: 60px;
 }
+
+
+.btn-view-details {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #2980b9;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.btn-view-details:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+.btn-view-details:active {
+  transform: translateY(0);
+}
+
+.btn-save-job {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  background: #f8f9fa;
+  border: 2px solid #0056b3;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 95%;
+}
+
+.btn-save-job:hover {
+  background: #0056b3;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btn-save-job:active {
+  transform: translateY(0);
+}
+

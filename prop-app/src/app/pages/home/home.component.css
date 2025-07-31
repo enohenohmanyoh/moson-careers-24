@@ -1,6 +1,6 @@
 /* Hero Section */
 .hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
               url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
   background-size: cover;
   background-position: center;
@@ -159,15 +159,15 @@
   .hero {
     padding: 5rem 0;
   }
-  
+
   .hero h1 {
     font-size: 2rem;
   }
-  
+
   .search-box {
     flex-direction: column;
   }
-  
+
   .search-box input {
     width: 100%;
   }

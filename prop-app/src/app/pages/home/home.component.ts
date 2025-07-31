@@ -91,6 +91,6 @@ export class HomeComponent implements OnInit {
   }
 
   viewJob(job: any): void{
-    this.router.navigate(['/jobs-details/', job.reference])
+    this.router.navigate(['/jobs-details/', job.reference]);
   }
 }
