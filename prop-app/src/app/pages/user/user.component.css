@@ -1,0 +1,54 @@
+.user-form-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group, .education-item {
+  margin-bottom: 15px;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-primary {
+  background: #007bff;
+  border: none;
+  color: white;
+}
+.btn-secondary {
+  background: #6c757d;
+  border: none;
+  color: white;
+}
+.btn-outline {
+  background: transparent;
+  border: 1px solid #007bff;
+  color: #007bff;
+}
+.btn-danger {
+  background: #dc3545;
+  border: none;
+  color: white;
+}

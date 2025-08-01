@@ -1,0 +1,86 @@
+<div class="mt-60">`</div>
+<div class="mt-60">`</div>
+<div class="user-form-container">
+  <h2>{{ isEditMode ? 'Edit User' : 'Create User' }}</h2>
+
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+    <!-- Basic Info -->
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" [(ngModel)]="user.firstName" name="firstName" required />
+    </div>
+
+    <div class="form-group">
+      <label>Surname</label>
+      <input type="text" [(ngModel)]="user.surname" name="surname" required />
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" [(ngModel)]="user.email" name="email" required />
+    </div>
+
+    <div class="form-group" *ngIf="!isEditMode">
+      <label>Password</label>
+      <input type="password" [(ngModel)]="user.password" name="password" required />
+    </div>
+
+    <div class="form-group">
+      <label>Role</label>
+      <select [(ngModel)]="user.role" name="role" required>
+        <option value="EMPLOYER">Employer</option>
+        <option value="JOB_SEEKER">Job Seeker</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Summary</label>
+      <textarea [(ngModel)]="user.summary" name="summary"></textarea>
+    </div>
+
+    <!-- Skills -->
+    <div class="form-group">
+      <label>Skills (comma separated)</label>
+      <input type="text" [(ngModel)]="skillsString" name="skills" placeholder="Java, Spring Boot, REST API" />
+    </div>
+
+    <!-- Education -->
+    <div class="educations-section">
+      <h3>Educations</h3>
+      <div class="education-item" *ngFor="let edu of user.educations; let i = index">
+        <input type="text" [(ngModel)]="edu.institution" name="institution-{{ i }}" placeholder="Institution" />
+        <input type="text" [(ngModel)]="edu.degree" name="degree-{{ i }}" placeholder="Degree" />
+        <input type="text" [(ngModel)]="edu.fieldOfStudy" name="fieldOfStudy-{{ i }}" placeholder="Field of Study" />
+        <input type="date" [(ngModel)]="edu.startDate" name="startDate-{{ i }}" />
+        <input type="date" [(ngModel)]="edu.endDate" name="endDate-{{ i }}" />
+        <button type="button" class="btn btn-danger btn-sm" (click)="removeEducation(i)">Remove</button>
+      </div>
+      <button type="button" class="btn btn-outline btn-sm" (click)="addEducation()">+ Add Education</button>
+    </div>
+
+    <!-- Employment Records (for Job Seekers only) -->
+    <div class="employment-section" *ngIf="user.role === 'JOB_SEEKER'">
+      <h3>Employment History</h3>
+      <div class="employment-item" *ngFor="let emp of user.employmentRecords; let i = index">
+        <input type="text" [(ngModel)]="emp.companyName" name="companyName-{{ i }}" placeholder="Company Name" />
+        <input type="text" [(ngModel)]="emp.jobTitle" name="jobTitle-{{ i }}" placeholder="Job Title" />
+        <input type="text" [(ngModel)]="emp.location" name="location-{{ i }}" placeholder="Location" />
+        <textarea [(ngModel)]="emp.responsibilities[0]" name="resp-{{ i }}" placeholder="Responsibilities"></textarea>
+        <button type="button" class="btn btn-danger btn-sm" (click)="removeEmployment(i)">Remove</button>
+      </div>
+      <button type="button" class="btn btn-outline btn-sm" (click)="addEmployment()">+ Add Employment</button>
+    </div>
+
+    <!-- CV Upload -->
+    <div class="form-group cv-upload">
+      <label>Upload CV (Optional - Autofill)</label>
+      <input type="file" (change)="onCvUpload($event)" accept=".pdf,.doc,.docx" />
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Update User' : 'Create User' }}</button>
+      <button type="reset" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>

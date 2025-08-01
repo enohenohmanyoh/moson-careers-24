@@ -1,41 +1,52 @@
-<div class="login-container">
-  <!-- Logo -->
-  <div class="logo-container">
-    <img src="assets/images/richFieldLogo.png" alt="Richfield Connect Logo" />
-    <h2>Richfield Connect</h2>
+<div class="login-page">
+  <!-- Left Side (Logo & Branding) -->
+  <div class="left-section">
+    <div class="logo-container">
+      <img src="assets/images/richFieldLogo.png" alt="Richfield Connect Logo"/>
+      <h2>Richfield Connect</h2>
+    </div>
   </div>
 
-  <!-- Login Form -->
-  <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="login-form">
-    <div class="form-group">
-      <label for="email">Email Address</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        [(ngModel)]="loginData.email"
-        required
-        placeholder="Enter your email"
-      />
-    </div>
+  <!-- Right Side (Login Form) -->
+  <div class="right-section">
+    <form (ngSubmit)="onLogin()" [formGroup]="loginForm" class="login-form">
+      <h3>Welcome Back!</h3>
+      <p>Please login to continue</p>
 
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        [(ngModel)]="loginData.password"
-        required
-        placeholder="Enter your password"
-      />
-    </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Enter your email"
+        />
+        <small class="error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+          Valid email is required.
+        </small>
+      </div>
 
-    <button type="submit" class="btn-login" [disabled]="!loginForm.valid">Login</button>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+        <small class="error" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          Password is required.
+        </small>
+      </div>
 
-    <div class="form-footer">
-      <a href="/forgot-password">Forgot Password?</a>
-      <a href="/register">Create Account</a>
-    </div>
-  </form>
+      <button type="submit" class="btn-login" [disabled]="!loginForm.valid  || isLoading">
+        Login
+      </button>
+
+      <div class="form-footer">
+        <a href="/forgot-password">Forgot Password?</a>
+        <a href="/user/create">Create Account</a>
+      </div>
+    </form>
+  </div>
 </div>

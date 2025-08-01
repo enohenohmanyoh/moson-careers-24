@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
-import {ReactiveFormsModule, FormBuilder, Validators, FormsModule} from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Router} from '@angular/router';
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
 import {HttpClientModule} from "@angular/common/http";
+import {SweetAlertMessage} from "../../services/sweet.alert";
 
 
 @Component({
@@ -16,10 +17,7 @@ import {HttpClientModule} from "@angular/common/http";
 })
 export class LoginComponent {
 
-  loginData  = {
-    email: '',
-    password: ''
-  }
+
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
@@ -29,10 +27,11 @@ export class LoginComponent {
   isLoading = false;
 
   constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) {}
+    private fb: FormBuilder, private authService: AuthService, private router: Router,
+    private sweetAlertMessage: SweetAlertMessage
+  ) {
+
+  }
 
   onLogin() {
     if (this.loginForm.invalid) return;
@@ -40,21 +39,26 @@ export class LoginComponent {
     this.isLoading = true;
     this.errorMessage = '';
 
-    const { email, password } = this.loginForm.value;
-
-    this.authService.login(email!, password!).subscribe({
+    const user: any = this.loginForm.value;
+    console.log('user', user);
+    this.authService.login(user).subscribe({
       next: (response) => {
         this.isLoading = false;
+        // Store user details and jwt token in local storage
+        const user = response.data;
+        window.localStorage.setItem('userEmail', JSON.stringify(user.userEmail));
+        window.localStorage.setItem('isLoggedIn', String(true));
         // Redirect based on user role
-        if (response.user.role === 'employer') {
-          this.router.navigate(['/employer']);
+        if (user.role.toLowerCase() === 'employer') {
+          this.router.navigate(['/']);
         } else {
-          this.router.navigate(['/candidate']);
+          this.router.navigate(['/list-jobs']);
         }
       },
       error: (error) => {
         this.isLoading = false;
-        this.errorMessage = error.message || 'Login failed. Please try again.';
+        const errorMessage = error?.error?.error
+        this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');
       }
     });
   }
