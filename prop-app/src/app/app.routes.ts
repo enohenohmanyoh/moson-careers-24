@@ -6,6 +6,8 @@ import {CourseComponent} from "./pages/course/course.component";
 import {ListCourseComponent} from "./pages/list-course/list-course.component";
 import {ViewCourseComponent} from "./pages/view-course/view-course.component";
 import {AboutComponent} from "./pages/about/about.component";
+import {UserComponent} from "./pages/user/user.component";
+import {LoginComponent} from "./pages/login/login.component";
 
 
 export const routes: Routes = [
@@ -17,6 +19,9 @@ export const routes: Routes = [
   {path: 'courses/edit/:courseId', component: CourseComponent},
   {path: 'courses/view/:courseId', component: ViewCourseComponent},
   {path: 'about', component: AboutComponent},
+  {path: 'user/create', component: UserComponent},
+  {path: 'user/edit/:userEmail', component: UserComponent},
+  {path: 'login', component: LoginComponent},
 
 
 //{ path: '**', redirectTo: '' },

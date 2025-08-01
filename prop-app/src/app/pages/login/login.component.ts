@@ -1,18 +1,25 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import {ReactiveFormsModule, FormBuilder, Validators, FormsModule} from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import {HttpClientModule} from "@angular/common/http";
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  providers: [AuthService],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, HttpClientModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
+  loginData  = {
+    email: '',
+    password: ''
+  }
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
@@ -27,7 +34,7 @@ export class LoginComponent {
     private router: Router
   ) {}
 
-  onSubmit() {
+  onLogin() {
     if (this.loginForm.invalid) return;
 
     this.isLoading = true;

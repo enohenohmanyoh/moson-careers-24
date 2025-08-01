@@ -1,7 +1,36 @@
 
-    footer {
-      background-color: #34495e;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-    }
+footer {
+  background-color: #34495e;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Make sure the body takes full height */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header and footer will stay at the top and bottom */
+app-header {
+  flex: 0 0 auto;
+  display: block;
+  z-index: 100;
+}
+
+app-footer {
+  flex: 0 0 auto;
+  display: block;
+  z-index: 100;
+  margin-top: auto; /* Footer pushes down */
+}
+
+/* Main content stays between header and footer */
+.main-content {
+  flex: 1 0 auto;
+  padding: 20px;
+  background: #f9f9f9;
+}
+
