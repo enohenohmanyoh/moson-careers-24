@@ -48,12 +48,16 @@ export class LoginComponent {
         const user = response.data;
         window.localStorage.setItem('userEmail', JSON.stringify(user.userEmail));
         window.localStorage.setItem('isLoggedIn', String(true));
+        window.localStorage.setItem('firstName', String(user.firstName));
         // Redirect based on user role
         if (user.role.toLowerCase() === 'employer') {
           this.router.navigate(['/']);
+          window.location.href = "/";
         } else {
-          this.router.navigate(['/list-jobs']);
+          window.location.href = '/list-jobs';
+          // window.location.reload();
         }
+
       },
       error: (error) => {
         this.isLoading = false;

@@ -6,11 +6,8 @@
 
     <nav class="nav" [class.active]="isMenuOpen">
       <ul>
-
         <a routerLink="/" routerLinkActive="active">Home</a>
         <a routerLink="/list-jobs" routerLinkActive="active">List Jobs</a>
-        <!--  <a routerLink="/jobs-details" routerLinkActive="active">List Jobs</a>-->
-
         <a routerLink="/employer" routerLinkActive="active">Employers</a>
         <a routerLink="/candidate" routerLinkActive="active">Candidates</a>
         <a routerLink="/courses" routerLinkActive="active">Courses</a>
@@ -18,9 +15,23 @@
       </ul>
     </nav>
 
-    <div class="auth-buttons">
+    <div class="auth-buttons" *ngIf="!isLoggedIn">
       <a routerLink="/login" class="btn btn-outline">Login</a>
       <a routerLink="/user/create" class="btn btn-primary">Register</a>
+    </div>
+
+    <!-- Dropdown for logged-in users -->
+    <div class="user-profile" *ngIf="isLoggedIn" (mouseenter)="toggleDropdown(true)" (mouseleave)="toggleDropdown(false)">
+      <div class="profile-btn">
+        <img src="assets/images/user/user.png" alt="Profile" class="profile-icon" />
+        <span>{{ firstName }}</span>
+        <i class="arrow-down"></i>
+      </div>
+      <ul class="dropdown-menu" [class.show]="isDropdownOpen">
+        <li><a routerLink="/user/profile">My Profile</a></li>
+        <li><a routerLink="/user/settings">Settings</a></li>
+        <li><a (click)="logout()">Logout</a></li>
+      </ul>
     </div>
 
     <button class="menu-toggle" (click)="toggleMenu()">

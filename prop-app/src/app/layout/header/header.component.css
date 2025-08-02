@@ -102,21 +102,79 @@
     transform: translateY(-150%);
     transition: transform 0.3s;
   }
-  
+
   .nav.active {
     transform: translateY(0);
   }
-  
+
   .nav ul {
     flex-direction: column;
     padding: 1rem;
   }
-  
+
   .auth-buttons {
     display: none;
   }
-  
+
   .menu-toggle {
     display: block;
   }
+}
+
+.user-profile {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.profile-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.arrow-down {
+  border: solid #333;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 4px;
+  transform: rotate(45deg);
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: #fff;
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-radius: 6px;
+  min-width: 150px;
+}
+
+.dropdown-menu li {
+  padding: 8px 12px;
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+
+.dropdown-menu li:hover {
+  background: #f4f4f4;
+}
+
+.dropdown-menu.show {
+  display: block;
 }
