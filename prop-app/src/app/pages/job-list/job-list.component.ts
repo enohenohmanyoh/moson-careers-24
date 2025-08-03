@@ -26,7 +26,7 @@ export class JobListComponent implements OnInit {
   userEmail: string | null = '';
 
 
-  constructor(private  router: Router, private jobService: JobService, private sweetAlertMessage: SweetAlertMessage) {
+  constructor(private router: Router, private jobService: JobService, private sweetAlertMessage: SweetAlertMessage) {
   }
 
   ngOnInit() {
@@ -110,7 +110,7 @@ export class JobListComponent implements OnInit {
     }
   }
 
-  viewJob(job: any){
+  viewJob(job: any) {
     this.router.navigate(['/jobs-details/', job.reference]);
   }
 
@@ -133,8 +133,6 @@ export class JobListComponent implements OnInit {
 
   getUserLocalStorage() {
     if (typeof window !== 'undefined') {
-      window.localStorage.setItem('userEmail', 'embottabi@gmail.com');
-
       this.userEmail = window.localStorage.getItem('userEmail');
     }
   }

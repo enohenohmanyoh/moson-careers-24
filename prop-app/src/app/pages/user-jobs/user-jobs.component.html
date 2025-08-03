@@ -1,0 +1,88 @@
+<div class="mt-60"></div>
+
+<main class="job-list-page">
+  <div class="container">
+    <div class="page-header">
+      <h2>{{ title }}</h2>
+    </div>
+
+    <div class="job-list-container">
+      <div></div>
+      <!--      <aside class="filters">-->
+      <!--        <div class="filter-section">-->
+      <!--          <h3>Search</h3>-->
+      <!--          <input type="text" placeholder="Job title or company"-->
+      <!--                 [(ngModel)]="searchTerm" (input)="filterJobs()">-->
+      <!--        </div>-->
+
+      <!--        <div class="filter-section">-->
+      <!--          <h3>Location</h3>-->
+      <!--          <select [(ngModel)]="locationFilter" (change)="filterJobsByLocation()">-->
+      <!--            <option value="">All Locations</option>-->
+      <!--            <option value="Cape Town">Cape Town</option>-->
+      <!--            <option value="Johannesburg">Johannesburg</option>-->
+      <!--            <option value="Durban">Durban</option>-->
+      <!--            <option value="Pretoria">Pretoria</option>-->
+      <!--            <option value="Remote">Remote</option>-->
+      <!--          </select>-->
+      <!--        </div>-->
+
+      <!--        <div class="filter-section">-->
+      <!--          <h3>Job Type</h3>-->
+      <!--          <select [(ngModel)]="jobTypeFilter" (change)="filterJobsByJobType()">-->
+      <!--            <option value="">All Types</option>-->
+      <!--            <option value="FULL_TIME">Full-time</option>-->
+      <!--            <option value="PART_TIME">Part-time</option>-->
+      <!--            <option value="CONTRACT">Contract</option>-->
+      <!--            <option value="HYBRID">Hybrid</option>-->
+      <!--            <option value="ON_SITE">On-Site</option>-->
+      <!--            <option value="INTERNSHIP">Internship</option>-->
+      <!--            <option value="TEMPORARY">Temporary</option>-->
+      <!--            <option value="FREELANCE">Freelance</option>-->
+      <!--            <option value="CONSULTANT">Consultant</option>-->
+      <!--            <option value="REMOTE">Remote</option>-->
+      <!--            <option value="INTERNSHIP">Internship</option>-->
+      <!--            <option value="VOLUNTEER">Volunteer</option>-->
+      <!--          </select>-->
+      <!--        </div>-->
+      <!--      </aside>-->
+
+      <div class="job-results">
+        <div class="results-count">
+          Showing {{ jobs.length }} jobs
+        </div>
+
+        <div class="jobs">
+          <div class="job-card" *ngFor="let job of jobs">
+            <div class="job-info">
+              <p class="company">{{ job.company }}</p>
+              <div class="job-meta">
+                <span class="location">{{ job.location }}</span>
+                <span class="type" *ngFor="let type of job.jobTypes" class="type-badge">
+                   {{ this.formatJobType(type) }},
+                  </span>
+                <span class="salary">{{ job.salary }}</span>
+                <span class="posted">{{ job.createdAt | date:'mediumDate' }}</span>
+              </div>
+              <p class="description">{{ job.description }}</p>
+            </div>
+            <div class="job-actions">
+              <button class="btn-view-details" (click)="viewJob(job)">
+                <span>🔍</span> View Details
+              </button>
+              <button [disabled]="type == 'applied-jobs'" class="apply-button" (click)="applyForJob(job)">Apply Now
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pagination">
+          <button class="btn btn-outline">Previous</button>
+          <span>Page 1 of 10</span>
+          <button class="btn btn-outline">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+

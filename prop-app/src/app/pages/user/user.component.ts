@@ -116,8 +116,6 @@ export class UserComponent implements OnInit {
 
   getUserLocalStorage() {
     if (typeof window !== 'undefined') {
-      window.localStorage.setItem('userEmail', 'embottabi@gmail.com');
-
       this.userEmail = window.localStorage.getItem('userEmail');
     }
   }

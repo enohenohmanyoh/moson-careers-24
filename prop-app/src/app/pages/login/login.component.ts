@@ -40,17 +40,16 @@ export class LoginComponent {
     this.errorMessage = '';
 
     const user: any = this.loginForm.value;
-    console.log('user', user);
     this.authService.login(user).subscribe({
       next: (response) => {
         this.isLoading = false;
         // Store user details and jwt token in local storage
-        const user = response.data;
-        window.localStorage.setItem('userEmail', JSON.stringify(user.userEmail));
+        const loginUser = response.data;
+        window.localStorage.setItem('userEmail', loginUser.email);
         window.localStorage.setItem('isLoggedIn', String(true));
-        window.localStorage.setItem('firstName', String(user.firstName));
+        window.localStorage.setItem('firstName', String(loginUser.firstName));
         // Redirect based on user role
-        if (user.role.toLowerCase() === 'employer') {
+        if (loginUser.role.toLowerCase() === 'employer') {
           this.router.navigate(['/']);
           window.location.href = "/";
         } else {

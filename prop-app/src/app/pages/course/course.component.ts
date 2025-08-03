@@ -112,8 +112,6 @@ export class CourseComponent {
 
   getUserLocalStorage() {
     if (typeof window !== 'undefined') {
-      window.localStorage.setItem('userEmail', 'embottabi@gmail.com');
-
       this.userEmail = window.localStorage.getItem('userEmail');
     }
   }
