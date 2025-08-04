@@ -10,6 +10,7 @@ import {UserComponent} from "./pages/user/user.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {UserJobsComponent} from "./pages/user-jobs/user-jobs.component";
 import {ManageJobsComponent} from "./pages/manage-jobs/manage-jobs.component";
+import {CreateJobsComponent} from "./pages/create-jobs/create-jobs.component";
 
 
 export const routes: Routes = [
@@ -26,6 +27,7 @@ export const routes: Routes = [
   {path: 'saved-jobs', component: UserJobsComponent},
   {path: 'applied-jobs', component: UserJobsComponent},
   {path: 'manage-jobs', component: ManageJobsComponent},
+  {path: 'create-jobs/:reference', component: CreateJobsComponent},
   {path: 'login', component: LoginComponent},
 
 

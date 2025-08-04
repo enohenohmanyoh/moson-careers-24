@@ -149,8 +149,8 @@ export class ManageJobsComponent implements OnInit {
     }
   }
 
-  viewJob(job: any) {
-    this.router.navigate(['/jobs-details/', job.reference]);
+  addJob(job: any) {
+    this.router.navigate(['/create-jobs', '12345']);
   }
 
   saveJob(job: any) {

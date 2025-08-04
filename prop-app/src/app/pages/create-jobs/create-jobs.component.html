@@ -1,0 +1,132 @@
+<div class="mt-60">`</div>
+<div class="mt-60">`</div>
+
+
+<div class="job-form-container">
+  <h2>Create / Edit Job</h2>
+  <form (ngSubmit)="submit()">
+    <!-- Basic Fields -->
+    <div class="form-row">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" [(ngModel)]="job.title" name="title" required/>
+      </div>
+
+      <div class="form-group">
+        <label>Company</label>
+        <input type="text" [(ngModel)]="job.company" name="company" required/>
+      </div>
+
+      <div class="form-group">
+        <label>Location</label>
+        <select [(ngModel)]="job.location" name="location" class="form-control">
+          <option value="">-- Select Location --</option>
+          <option *ngFor="let loc of locationOptions" [value]="loc">
+            {{ loc }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Salary</label>
+        <input type="text" [(ngModel)]="job.salary" name="salary"/>
+      </div>
+    </div>
+
+    <!-- Descriptions -->
+    <div class="form-group">
+      <label>Job Description</label>
+      <textarea [(ngModel)]="job.description" name="description" rows="4"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Company Description</label>
+      <textarea [(ngModel)]="job.companyDescription" name="companyDescription" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Company URL</label>
+      <input type="text" [(ngModel)]="job.companyUrl" name="companyUrl"/>
+    </div>
+
+    <!-- Job Types -->
+    <div class="form-group">
+      <label>Job Types</label>
+      <div class="checkbox-group">
+        <label *ngFor="let type of jobTypeOptions">
+          <input type="checkbox" [value]="type" [checked]="job.jobTypes.includes(type)" (change)="toggleJobType(type)"/>
+          {{ type.replace('_', ' ') }}
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Reference</label>
+      <input type="text" [(ngModel)]="job.reference" name="reference"/>
+    </div>
+
+    <div class="form-group">
+      <label>Required Skills</label>
+      <div class="tags-input-container">
+        <div class="tags-list">
+      <span class="tag" *ngFor="let skill of job.requiredSkills; let i = index">
+          {{ skill }}
+        <span class="remove-tag" (click)="removeSkill(i)">×</span>
+      </span>
+          <input
+            type="text"
+            class="tag-input"
+            [(ngModel)]="newSkill"
+            name="newSkill"
+            (keydown.enter)="addSkill($event)"
+            placeholder="Type skill & press Enter"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Responsibilities</label>
+      <div class="tags-input-container">
+        <div class="tags-list">
+      <span class="tag" *ngFor="let responsibility of job.responsibilities; let i = index">
+          {{ responsibility }}
+        <span class="remove-tag" (click)="removeResponsibility(i)">×</span>
+      </span>
+          <input
+            type="text"
+            class="tag-input"
+            [(ngModel)]="newResponsibility"
+            name="newSkill"
+            (keydown.enter)="addResponsibility($event)"
+            placeholder="Type Responsibility & press Enter"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Benefits</label>
+      <div class="tags-input-container">
+        <div class="tags-list">
+      <span class="tag" *ngFor="let benefit of job.benefits; let i = index">
+          {{ benefit }}
+        <span class="remove-tag" (click)="removeBenefit(i)">×</span>
+      </span>
+          <input
+            type="text"
+            class="tag-input"
+            [(ngModel)]="newBenefit"
+            name="newSkill"
+            (keydown.enter)="addBenefit($event)"
+            placeholder="Type Benefit & press Enter"
+          />
+        </div>
+      </div>
+    </div>
+    <!-- Submit -->
+    <div class="form-actions">
+      <button type="submit" class="submit-btn">Save Job</button>
+    </div>
+  </form>
+</div>
