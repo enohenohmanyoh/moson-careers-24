@@ -55,6 +55,7 @@ export class UserJobsComponent implements OnInit {
 
   getUserDetails() {
     if (this.userEmail) {
+      this.sweetAlertMessage.showLoading();
       this.userService.getUserByEmail(this.userEmail).subscribe(response => {
         if (this.type == 'saved-jobs') {
           this.jobs = response?.data?.savedJobs?.map((job: { job: any; }) => job.job);
@@ -63,6 +64,7 @@ export class UserJobsComponent implements OnInit {
           this.jobs = response?.data?.appliedJobs?.map((job: { job: any; }) => job.job);
           this.title = 'Applied Jobs';
         }
+        this.sweetAlertMessage.closeBox();
       }, error => {
         const errorMessage = error?.error?.error
         this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');

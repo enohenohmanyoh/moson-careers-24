@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = true;
   userName = '';
   firstName: string | null = '';
+  userEmail: string | null = '';
 
   isDropdownOpen = false;
 
@@ -29,6 +30,7 @@ export class HeaderComponent implements OnInit {
 
     if (typeof window !== 'undefined' && window.localStorage) {
       this.firstName = localStorage.getItem('firstName') || '';
+      this.userEmail = localStorage.getItem('userEmail') || '';
       this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     }
 
@@ -42,6 +44,9 @@ export class HeaderComponent implements OnInit {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
+  routerToUser(){
+    this.router.navigate(['/user-profile/'+this.userName, this.userName]);
+  }
 
   logout() {
     // handle logout logic here
@@ -53,23 +58,3 @@ export class HeaderComponent implements OnInit {
 
   }
 }
-
-
-/*
-import { Component, ViewEncapsulation } from '@angular/core';
-import { RouterModule } from '@angular/router';
-
-
-@Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [RouterModule], // ✅ Add CommonModule here
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
-})
-export class HeaderComponent {
-
-
-}
-*/

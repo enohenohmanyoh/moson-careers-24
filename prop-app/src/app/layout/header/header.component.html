@@ -26,7 +26,7 @@
         <i class="arrow-down"></i>
       </div>
       <ul class="dropdown-menu" [class.show]="isDropdownOpen">
-        <li><a routerLink="/user/profile">My Profile</a></li>
+        <li><a (click)="routerToUser()">My Profile</a></li>
         <li><a routerLink="/saved-jobs">Saved Jobs</a></li>
         <li><a routerLink="/applied-jobs">Applied Jobs</a></li>
         <li><a routerLink="/user/settings">Settings</a></li>

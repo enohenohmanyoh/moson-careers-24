@@ -21,7 +21,7 @@ export const routes: Routes = [
   {path: 'courses/view/:courseId', component: ViewCourseComponent},
   {path: 'about', component: AboutComponent},
   {path: 'user/create', component: UserComponent},
-  {path: 'user/edit/:userEmail', component: UserComponent},
+  {path: 'user-profile/:userEmail', component: UserComponent},
   {path: 'saved-jobs', component: UserJobsComponent},
   {path: 'applied-jobs', component: UserJobsComponent},
   {path: 'login', component: LoginComponent},

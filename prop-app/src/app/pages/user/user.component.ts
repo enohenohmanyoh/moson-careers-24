@@ -36,13 +36,16 @@ export class UserComponent implements OnInit {
 
   constructor(private sweetAlertMessage: SweetAlertMessage, private userService: UserService
     , private router: Router, private activatedRoute: ActivatedRoute) {
+    let userEmail = this.activatedRoute.snapshot.paramMap.get('userEmail')!;
   }
 
   ngOnInit() {
     this.getUserLocalStorage();
     if (this.isEditMode && this.existingUser) {
+      this.getUserDetails();
       this.user = {...this.existingUser};
       this.skillsString = this.user.skills?.join(', ') || '';
+
     }
   }
 
@@ -117,6 +120,22 @@ export class UserComponent implements OnInit {
   getUserLocalStorage() {
     if (typeof window !== 'undefined') {
       this.userEmail = window.localStorage.getItem('userEmail');
+    }
+  }
+
+  getUserDetails() {
+    if (this.userEmail) {
+      this.userService.getUserByEmail(this.userEmail).subscribe(response => {
+
+        // this.jobs = response?.data?.savedJobs?.map((job: { job: any; }) => job.job);
+
+        this.user = response.data;
+        this.existingUser = response.data;
+        console.log('existingUser: ',this.existingUser);
+      }, error => {
+        const errorMessage = error?.error?.error
+        this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');
+      });
     }
   }
 }
