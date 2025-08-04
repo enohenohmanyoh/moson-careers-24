@@ -9,6 +9,7 @@ import {AboutComponent} from "./pages/about/about.component";
 import {UserComponent} from "./pages/user/user.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {UserJobsComponent} from "./pages/user-jobs/user-jobs.component";
+import {ManageJobsComponent} from "./pages/manage-jobs/manage-jobs.component";
 
 
 export const routes: Routes = [
@@ -24,6 +25,7 @@ export const routes: Routes = [
   {path: 'user-profile', component: UserComponent},
   {path: 'saved-jobs', component: UserJobsComponent},
   {path: 'applied-jobs', component: UserJobsComponent},
+  {path: 'manage-jobs', component: ManageJobsComponent},
   {path: 'login', component: LoginComponent},
 
 

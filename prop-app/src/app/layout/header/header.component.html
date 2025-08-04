@@ -30,6 +30,7 @@
         <li><a routerLink="/user-profile">My Profile</a></li>
         <li><a routerLink="/saved-jobs">Saved Jobs</a></li>
         <li><a routerLink="/applied-jobs">Applied Jobs</a></li>
+        <li *ngIf="isUserRole()"><a routerLink="/manage-jobs">Manage Jobs</a></li>
         <li><a routerLink="/user/settings">Settings</a></li>
         <li><a (click)="logout()">Logout</a></li>
       </ul>

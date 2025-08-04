@@ -46,6 +46,7 @@ export class LoginComponent {
         // Store user details and jwt token in local storage
         const loginUser = response.data;
         window.localStorage.setItem('userEmail', loginUser.email);
+        window.localStorage.setItem('userRole', loginUser.role);
         window.localStorage.setItem('isLoggedIn', String(true));
         window.localStorage.setItem('firstName', String(loginUser.firstName));
         // Redirect based on user role

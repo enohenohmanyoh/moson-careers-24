@@ -1,77 +1,56 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Job} from '../model/job.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobService {
-  private apiUrl = 'http://localhost:8080/api/job';
+  private apiUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {
   }
 
-  // Get all jobs
-  getJobs(): Observable<Job[]> {
-    return this.http.get<Job[]>(this.apiUrl);
-  }
 
   getAllJobs(search: string = ''): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/all-jobs${search? search: ''}`);
+    return this.http.get<any>(`${this.apiUrl}/job/all-jobs${search ? search : ''}`);
 
   }
 
   getJobByJobReference(reference: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/by-reference?reference=${reference}`);
+    return this.http.get<any>(`${this.apiUrl}/job/by-reference?reference=${reference}`);
   }
+
   getAllJobsByJobType(jobTypes: string[]): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/all-jobs-by-job-types?jobTypes=${jobTypes}`);
+    return this.http.get<any>(`${this.apiUrl}/job/all-jobs-by-job-types?jobTypes=${jobTypes}`);
   }
+
   getAllJobsByLocation(location: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/all-jobs-by-location?location=${location}`);
+    return this.http.get<any>(`${this.apiUrl}/job/all-jobs-by-location?location=${location}`);
   }
 
-
-  // Updated to accept both string and number IDs
-  getJobById(id: string | number): Observable<Job> {
-    return this.http.get<Job>(`${this.apiUrl}/${id}`);
+  getEmployerJobs(userEmail: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/job/by-user-email?userEmail=${userEmail}`);
   }
 
-  // Search jobs
-  searchJobs(query: string, location?: string): Observable<Job[]> {
-    const params: any = {q: query};
-    if (location) params.location = location;
-    return this.http.get<Job[]>(`${this.apiUrl}/search`, {params});
+  getAllJobsByUserAndJobTypes(userEmail: string, jobTypes: string[]): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/job/by-user-email-job-types?jobTypes=${jobTypes}&userEmail=${userEmail}`);
   }
 
-  // Employer methods - updated to accept both string and number IDs
-  getEmployerJobs(): Observable<Job[]> {
-    return this.http.get<Job[]>(`${this.apiUrl}/employer`);
+  getAllJobsByUserAndLocation(userEmail: string, location: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/job/by-user-email-location?location=${location}&userEmail=${userEmail}`);
   }
 
-  postJob(jobData: any): Observable<Job> {
-    return this.http.post<Job>(this.apiUrl, jobData);
+  closeJob(reference: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/job/close-job-by-reference?reference=${reference}`);
   }
 
-  updateJob(id: string | number, jobData: any): Observable<Job> {
-    return this.http.put<Job>(`${this.apiUrl}/${id}`, jobData);
-  }
-
-  // Candidate methods - updated to accept both string and number IDs
-  getSavedJobs(): Observable<Job[]> {
-    return this.http.get<Job[]>(`${this.apiUrl}/saved`);
-  }
-
-  getAppliedJobs(): Observable<Job[]> {
-    return this.http.get<Job[]>(`${this.apiUrl}/applications`);
-  }
 
   applyForJob(userEmail: string, jobReference: any): Observable<any> {
-    return this.http.post(` http://localhost:8080/api/user/apply-for-job?userEmail=${userEmail}&jobReference=${jobReference}`, {});
+    return this.http.post(`${this.apiUrl}/user/apply-for-job?userEmail=${userEmail}&jobReference=${jobReference}`, {});
   }
 
   saveJob(userEmail: string, jobReference: any): Observable<any> {
-    return this.http.post(` http://localhost:8080/api/user/save-job?userEmail=${userEmail}&jobReference=${jobReference}`, {});
+    return this.http.post(`${this.apiUrl}/user/save-job?userEmail=${userEmail}&jobReference=${jobReference}`, {});
   }
 }

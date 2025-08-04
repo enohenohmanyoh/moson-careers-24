@@ -12,9 +12,9 @@ import {CommonModule} from '@angular/common';
 export class HeaderComponent implements OnInit {
   isMenuOpen = false;
   isLoggedIn = true;
-  userName = '';
   firstName: string | null = '';
   userEmail: string | null = '';
+  userRole: string | null = '';
 
   isDropdownOpen = false;
 
@@ -31,9 +31,14 @@ export class HeaderComponent implements OnInit {
     if (typeof window !== 'undefined' && window.localStorage) {
       this.firstName = localStorage.getItem('firstName') || '';
       this.userEmail = localStorage.getItem('userEmail') || '';
+      this.userRole = localStorage.getItem('userRole') || '';
       this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     }
 
+  }
+
+  isUserRole() {
+    return this.userRole === 'EMPLOYER';
   }
 
   toggleDropdown(open: boolean) {
@@ -49,6 +54,7 @@ export class HeaderComponent implements OnInit {
     // handle logout logic here
     window.localStorage.setItem('firstName', "");
     window.localStorage.setItem('userEmail', "");
+    window.localStorage.setItem('userRole', "");
     window.localStorage.setItem('isLoggedIn', String(false));
     this.isLoggedIn = false
     this.router.navigate(['/']);

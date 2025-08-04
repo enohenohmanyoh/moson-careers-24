@@ -1,0 +1,334 @@
+.job-list-page {
+  padding: 2rem 0;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+}
+
+.page-header p {
+  color: #7f8c8d;
+  font-size: 1.2rem;
+}
+
+.job-list-container {
+  display: flex;
+  gap: 2rem;
+}
+
+/* Sidebar filters */
+.filters {
+  width: 250px;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  height: fit-content;
+}
+
+.filter-section {
+  margin-bottom: 1.5rem;
+}
+
+.filter-section h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  color: #2c3e50;
+}
+
+.filter-section input,
+.filter-section select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Job results */
+.job-results {
+  flex: 1;
+}
+
+.results-count {
+  margin-bottom: 1rem;
+  color: #7f8c8d;
+}
+
+/* Add Button*/
+.add-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 1rem;
+}
+
+.btn-add-job {
+  background-color: #007bff; /* Bootstrap blue */
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-add-job:hover {
+  background-color: #0056b3;
+}
+
+.btn-add-job .icon {
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+
+
+
+
+/*.jobs {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  gap: 1.5rem;*/
+/*}*/
+
+/*!* Job card *!*/
+/*.job-card {*/
+/*  background-color: white;*/
+/*  padding: 1.5rem;*/
+/*  border-radius: 8px;*/
+/*  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  gap: 1.5rem;*/
+/*}*/
+
+/*.job-info {*/
+/*  flex: 1;*/
+/*}*/
+
+/*.job-info h2 {*/
+/*  font-size: 1.3rem;*/
+/*  margin-bottom: 0.5rem;*/
+/*}*/
+
+/*.job-info h2 a {*/
+/*  color: #2c3e50;*/
+/*  text-decoration: none;*/
+/*}*/
+
+/*.job-info h2 a:hover {*/
+/*  color: #3498db;*/
+/*}*/
+
+/*.company {*/
+/*  color: #3498db;*/
+/*  margin-bottom: 0.8rem;*/
+/*}*/
+
+/*.job-meta {*/
+/*  display: flex;*/
+/*  flex-wrap: wrap;*/
+/*  gap: 1rem;*/
+/*  margin-bottom: 1rem;*/
+/*  color: #7f8c8d;*/
+/*}*/
+
+/*.description {*/
+/*  color: #34495e;*/
+/*  line-height: 1.5;*/
+/*  margin-bottom: 0;*/
+/*}*/
+
+/*!* View / Save buttons *!*/
+/*.job-actions {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: flex-start;*/
+/*  gap: 0.5rem;*/
+/*  min-width: 150px;*/
+/*}*/
+
+/*.view-button {*/
+/*  display: inline-block;*/
+/*  padding: 0.6rem 1.2rem;*/
+/*  background-color: #3498db;*/
+/*  color: white;*/
+/*  text-decoration: none;*/
+/*  border-radius: 4px;*/
+/*  font-weight: 600;*/
+/*  transition: background-color 0.2s ease;*/
+/*}*/
+
+/*.view-button:hover {*/
+/*  background-color: #2980b9;*/
+/*}*/
+
+/*.save-button {*/
+/*  padding: 0.6rem 1.2rem;*/
+/*  background-color: #ecf0f1;*/
+/*  color: #2c3e50;*/
+/*  border: 1px solid #bdc3c7;*/
+/*  border-radius: 4px;*/
+/*  font-weight: 600;*/
+/*  cursor: pointer;*/
+/*  transition: all 0.2s ease;*/
+/*}*/
+
+/*.save-button:hover {*/
+/*  background-color: #dfe6e9;*/
+/*  border-color: #95a5a6;*/
+/*}*/
+
+/*!* Pagination *!*/
+/*.pagination {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  gap: 1rem;*/
+/*  margin-top: 2rem;*/
+/*}*/
+
+/*!* Responsive *!*/
+/*@media (max-width: 768px) {*/
+/*  .job-list-container {*/
+/*    flex-direction: column;*/
+/*  }*/
+
+/*  .filters {*/
+/*    width: 100%;*/
+/*  }*/
+
+/*  .job-card {*/
+/*    flex-direction: column;*/
+/*  }*/
+
+/*  .job-actions {*/
+/*    flex-direction: row;*/
+/*    justify-content: flex-start;*/
+/*    gap: 1rem;*/
+/*  }*/
+
+/*  .view-button,*/
+/*  .save-button {*/
+/*    flex: 1;*/
+/*    text-align: center;*/
+/*  }*/
+/*}*/
+
+.jobs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.job-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-left: 5px solid #007bff;
+  transition: box-shadow 0.3s ease;
+}
+
+.job-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.job-title a {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.job-title a:hover {
+  text-decoration: underline;
+}
+
+.company {
+  font-weight: 500;
+  margin: 0.25rem 0;
+  color: #555;
+}
+
+.job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.type-badge {
+  background-color: #e7f3ff;
+  color: #0056b3;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.salary {
+  font-weight: bold;
+  color: #333;
+}
+
+.description {
+  margin: 0.75rem 0;
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.job-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  justify-content: flex-end;
+}
+
+.btn-action {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-weight: 500;
+}
+
+.btn-action .icon {
+  font-size: 1rem;
+}
+
+.btn-action.edit {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.btn-action.edit:hover {
+  background-color: #e0e0e0;
+}
+
+.btn-action.close {
+  background-color: #ffdddd;
+  color: #a00;
+}
+
+.btn-action.close:hover {
+  background-color: #ffcccc;
+}
