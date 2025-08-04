@@ -44,9 +44,6 @@ export class HeaderComponent implements OnInit {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  routerToUser(){
-    this.router.navigate(['/user-profile/'+this.userName, this.userName]);
-  }
 
   logout() {
     // handle logout logic here

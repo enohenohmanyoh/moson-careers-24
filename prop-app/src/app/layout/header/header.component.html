@@ -19,14 +19,15 @@
     </div>
 
     <!-- Dropdown for logged-in users -->
-    <div class="user-profile" *ngIf="isLoggedIn" (mouseenter)="toggleDropdown(true)" (mouseleave)="toggleDropdown(false)">
+    <div class="user-profile" *ngIf="isLoggedIn" (mouseenter)="toggleDropdown(true)"
+         (mouseleave)="toggleDropdown(false)">
       <div class="profile-btn">
-        <img src="assets/images/user/user.png" alt="Profile" class="profile-icon" />
+        <img src="assets/images/user/user.png" alt="Profile" class="profile-icon"/>
         <span>{{ firstName }}</span>
         <i class="arrow-down"></i>
       </div>
       <ul class="dropdown-menu" [class.show]="isDropdownOpen">
-        <li><a (click)="routerToUser()">My Profile</a></li>
+        <li><a routerLink="/user-profile">My Profile</a></li>
         <li><a routerLink="/saved-jobs">Saved Jobs</a></li>
         <li><a routerLink="/applied-jobs">Applied Jobs</a></li>
         <li><a routerLink="/user/settings">Settings</a></li>

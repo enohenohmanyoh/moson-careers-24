@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SweetAlertMessage} from "../../services/sweet.alert";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
@@ -15,8 +15,8 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrl: './user.component.css'
 })
 export class UserComponent implements OnInit {
-  @Input() isEditMode = false;
-  @Input() existingUser: any = null;
+  isEditMode = false;
+  existingUser: any = null;
 
   user: any = {
     firstName: '',
@@ -33,19 +33,24 @@ export class UserComponent implements OnInit {
 
   skillsString = '';
   userEmail: string | null = '';
+  type: string | null = '';
 
   constructor(private sweetAlertMessage: SweetAlertMessage, private userService: UserService
     , private router: Router, private activatedRoute: ActivatedRoute) {
     let userEmail = this.activatedRoute.snapshot.paramMap.get('userEmail')!;
+    const urlSegments = this.activatedRoute.snapshot.url;
+
+    this.type = urlSegments.map(segment => segment.path).join('/');
+    if (this.type === 'user-profile') {
+      this.isEditMode = true;
+    }
   }
 
   ngOnInit() {
     this.getUserLocalStorage();
-    if (this.isEditMode && this.existingUser) {
+    console.log('type', this.type)
+    if (this.isEditMode) {
       this.getUserDetails();
-      this.user = {...this.existingUser};
-      this.skillsString = this.user.skills?.join(', ') || '';
-
     }
   }
 
@@ -99,13 +104,34 @@ export class UserComponent implements OnInit {
   }
 
 
-  onSubmit() {
+  submit(): void {
+    this.sweetAlertMessage.showLoading();
+    if (this.existingUser) {
+      this.onupdateSubmit();
+    } else {
+      this.onCreateSubmit();
+    }
+  }
+
+  onCreateSubmit(): void {
     this.user.skills = this.skillsString.split(',').map((s: string) => s.trim());
     console.log('User saved:', this.user);
+
     this.userService.saveUser(this.user).subscribe(response => {
-      this.sweetAlertMessage.bannerMessage('User Created successfully!', 'success');
+      this.sweetAlertMessage.bannerMessage('user created successfully!', 'success');
       this.user = {}
       this.router.navigate(['/list-jobs'])
+    }, error => {
+      const errorMessage = error?.error?.error;
+      this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');
+    });
+  }
+
+  onupdateSubmit(): void {
+    this.user.skills = this.skillsString.split(',').map((s: string) => s.trim());
+    this.user = Object.assign(this.existingUser, this.user);
+    this.userService.updateUser(this.user).subscribe(response => {
+      this.sweetAlertMessage.bannerMessage('user updated successfully!', 'success');
     }, error => {
       const errorMessage = error?.error?.error;
       this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');
@@ -124,14 +150,12 @@ export class UserComponent implements OnInit {
   }
 
   getUserDetails() {
+    console.log('userEmail: ', this.userEmail);
     if (this.userEmail) {
       this.userService.getUserByEmail(this.userEmail).subscribe(response => {
-
-        // this.jobs = response?.data?.savedJobs?.map((job: { job: any; }) => job.job);
-
         this.user = response.data;
         this.existingUser = response.data;
-        console.log('existingUser: ',this.existingUser);
+        this.skillsString = this.existingUser.skills?.join(', ') || '';
       }, error => {
         const errorMessage = error?.error?.error
         this.sweetAlertMessage.bannerMessage(errorMessage, 'warning');
